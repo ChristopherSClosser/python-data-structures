@@ -17,19 +17,34 @@ def new_node():
     return Node(1)
 
 
+def test_new_emty_graph__nodes(new_graph):
+    """Test_new_emty_graph__nodes."""
+    assert new_graph._nodes == []
+
+
 def test_new_emty_graph_nodes(new_graph):
     """Test_new_emty_graph_nodes."""
-    assert new_graph._nodes == []
+    assert new_graph.nodes() == []
+
+
+def test_new_emty_graph__edges(new_graph):
+    """Test_new_emty_graph__edges."""
+    assert new_graph._edges == []
 
 
 def test_new_emty_graph_edges(new_graph):
     """Test_new_emty_graph_edges."""
-    assert new_graph._edges == []
+    assert new_graph.edges() == []
 
 
 def test_node_neighbors(new_node):
     """Test_node_neighbors."""
     assert new_node.neighbors == []
+
+
+def test_del_node_doesnt_exist(new_graph):
+    """Test_del_node_doesnt_exist."""
+    assert new_graph.del_node(2) == 'node not found'
 
 
 def test_insert_1node(new_graph):
@@ -46,8 +61,7 @@ def test_newgraph_scope(new_graph):
 def test_insert_duplicate_node_raises_error(new_graph):
     """Test_insert_duplicate_node_raises_error."""
     new_graph.add_node(1)
-    with pytest.raises(ValueError):
-        new_graph.add_node(1)
+    assert new_graph.add_node(1) == "Nodes must have unique values"
 
 
 def test_add_edge_empty_graph_makes_nodes(new_graph):
@@ -70,6 +84,13 @@ def test_add_edge_existing_nodes(new_graph):
     new_graph.add_edge(1, 2)
     assert new_graph._edges[0][0].val == 1
     assert new_graph._edges[0][1].val == 2
+
+
+def test_add_edge_same_node_error(new_graph):
+    """Won't make circular edge to same node."""
+    new_graph.add_node(1)
+    new_graph.add_node(2)
+    assert new_graph.add_edge(1, 1) == "You cannot connect a node to itself"
 
 
 def test_add_existing_edge(new_graph):
@@ -164,6 +185,20 @@ def test_remove_edge(new_graph):
     assert ng._edges == []
 
 
+def test_remove_edge_not_exist():
+    """Test_remove_edge_not_exist."""
+    ng = Graph()
+    ng.add_edge(1, 2)
+    assert ng.del_edge(2, 3) == 'edge not found'
+
+
+def test_adjacent_returns_false_edge_not_exist():
+    """Test_adjacent_returns_false_edge_not_exist."""
+    ng = Graph()
+    ng.add_edge(1, 2)
+    assert ng.adjacent(2, 3) is False
+
+
 def test_remove_edge_also_removes_neighbors():
     """Test_remove_edge_also_removes_neighbors."""
     ng = Graph()
@@ -179,6 +214,20 @@ def test_graph_depth_first():
     ng = Graph()
     ng.add_edge(1, 2)
     assert ng.depth_first_traversal(1) == [1, 2]
+
+
+def test_graph_depth_first_node_not_found():
+    """Test_graph_depth_first_node_not_found."""
+    ng = Graph()
+    ng.add_edge(1, 2)
+    assert ng.depth_first_traversal(3) == 'node not found'
+
+
+def test_graph_breadth_first_node_not_found():
+    """Test_graph_breadth_first_node_not_found."""
+    ng = Graph()
+    ng.add_edge(1, 2)
+    assert ng.breadth_first_traversal(3) == 'node not found'
 
 
 def test_graph_depth_first_large():
@@ -349,5 +398,11 @@ def test_edge_weight():
 def test_edge_weight_not_num():
     """Test incorrect weight."""
     ng = Graph()
-    with pytest.raises(ValueError):
-        ng.add_edge(1, 2, 'qwoei')
+    assert ng.add_edge(1, 2, 'qwoei') == 'weight must be int or float'
+
+
+def test_add_duplicate_node():
+    """Test_add_duplicate_node."""
+    ng = Graph()
+    ng.add_node(1)
+    assert ng.add_node(1) == "Nodes must have unique values"

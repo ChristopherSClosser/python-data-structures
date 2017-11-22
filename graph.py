@@ -23,13 +23,13 @@ class Graph(object):
         """."""
         for node in self._nodes:
             if node.val == val:
-                raise ValueError("Nodes must have unique values")
+                return "Nodes must have unique values"
         self._nodes.append(Node(val))
 
     def add_edge(self, val1, val2, weight=0):
         """Add a connection between two nodes, val1 points to val2."""
         if not isinstance(weight, (int, float)):
-            raise ValueError('weight must be int or float')
+            return 'weight must be int or float'
         node1 = 0
         node2 = 0
         for node in self._nodes:
@@ -44,7 +44,7 @@ class Graph(object):
             node2 = Node(val2)
             self._nodes.append(node2)
         if node1 == node2:
-            raise ValueError("You cannot connect a node to itself")
+            return "You cannot connect a node to itself"
         for edge in self._edges:
             if edge == (node1, node2, weight):
                 return 'Edge already exists'
@@ -55,6 +55,8 @@ class Graph(object):
     def del_node(self, val):
         """Delete and remove edges."""
         del_node = self.has_node(val)
+        if not del_node:
+            return 'node not found'
         self._nodes.remove(del_node)
 
         for edge in self._edges:
@@ -64,8 +66,6 @@ class Graph(object):
             for neighbor in node.neighbors:
                 if del_node.val == neighbor[0].val or del_node.val == neighbor[1].val:
                     node.neighbors.remove(neighbor)
-        if del_node == 0:
-            raise ValueError('node not found')
 
     def del_edge(self, val1, val2):
         """Remove an edge."""
@@ -85,7 +85,6 @@ class Graph(object):
         for node in self._nodes:
             if node.val == val:
                 return node
-        raise ValueError('node not found')
 
     def neighbors(self, val):
         """Return list of neighbors for the given node."""
@@ -103,7 +102,7 @@ class Graph(object):
     def depth_first_traversal(self, start_val):
         """."""
         if not self.has_node(start_val):
-            raise ValueError('node not found')
+            return 'node not found'
         current = self.has_node(start_val)
         res = [current.val]
         unvisited = []
@@ -126,7 +125,7 @@ class Graph(object):
     def breadth_first_traversal(self, start_val):
         """."""
         if not self.has_node(start_val):
-            raise ValueError('node not found')
+            return 'node not found'
         current = self.has_node(start_val)
         res = [current.val]
         unvisited = []
@@ -156,7 +155,7 @@ class Node(object):
         self.neighbors = []
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma no cover
     g1 = Graph()
     g1.add_edge(1, 2)
     g1.add_edge(1, 3)

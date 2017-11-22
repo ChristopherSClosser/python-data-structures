@@ -122,9 +122,14 @@ def test_remove_removes_node():
 
 def test_remove_raises_exception_when_node_not_found():
     """Test that exception is raised when node isn't found."""
-    with pytest.raises(IndexError):
-        ll = LinkedList()
-        ll.remove(ll.head)
+    ll = LinkedList()
+    assert ll.remove(ll.head) == "Node was not found in list"
+
+
+def test_pop_raises_exception_when_node_not_found():
+    """Test that exception is raised when node isn't found."""
+    ll = LinkedList()
+    assert ll.pop() == "List is empty, cannot pop from an empty list"
 
 
 def test_linkedlist_take_iterable():

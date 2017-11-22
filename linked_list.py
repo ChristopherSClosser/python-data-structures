@@ -20,7 +20,7 @@ class LinkedList(object):
     def pop(self):
         """Remove the head of the list and return it."""
         if self.head is None:
-            raise IndexError("List is empty, cannot pop from an empty list")
+            return "List is empty, cannot pop from an empty list"
         val = self.head
         self.head = self.head.next_node
         self.length -= 1
@@ -46,7 +46,7 @@ class LinkedList(object):
             current = current.next_node
 
         if node_to_remove is None:
-            raise IndexError("Node was not found in list")
+            return "Node was not found in list"
 
     def size(self):
         """Return the length of the list."""

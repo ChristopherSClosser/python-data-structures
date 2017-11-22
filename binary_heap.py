@@ -12,10 +12,10 @@ class Binheap(object):
     def push(self, val):
         """Add new value."""
         self._tailidx += 1
-        if self._tailidx < len(self.container):
-            self.container[self._tailidx] = val
-        else:
-            self.container.append(val)
+        # if self._tailidx < len(self.container):
+        #     self.container[self._tailidx] = val
+        # else:
+        self.container.append(val)
         self._shiftup(self._tailidx)
 
     def pop(self):

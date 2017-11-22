@@ -127,6 +127,14 @@ def test_append_to_empty_dll(new_dll):
     assert new_dll.tail.val == 3
 
 
+def test_shift_single_item(new_dll):
+    """Test for append method."""
+    new_dll.append(3)
+    new_dll.shift()
+    assert new_dll.tail is None
+    assert new_dll.head is None
+
+
 def test_shift_removes_tail(new_dll):
     """Test_shift_removes_tail."""
     new_dll.push(2)

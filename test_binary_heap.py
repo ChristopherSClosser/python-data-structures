@@ -14,6 +14,17 @@ def test_new_tree_first_node_no_head(new_bin):
     assert new_bin.container == []
 
 
+def test_pop_empty_list(new_bin):
+    """Test_pop_empty_list."""
+    with pytest.raises(IndexError):
+        new_bin.pop()
+
+
+def test_no_parent_empty(new_bin):
+    """Test_no_parent_empty."""
+    assert new_bin._parent(0) == (None, None)
+
+
 def test_push_one_val(new_bin):
     """Empty heap should have one item in it."""
     new_bin.push(3)

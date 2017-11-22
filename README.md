@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/maxawolff/data-structures.svg?branch=master)](https://travis-ci.org/maxawolff/data-structures)
+[![Build Status](https://travis-ci.org/ChristopherSClosser/python-data-structures.svg?branch=master)](https://travis-ci.org/ChristopherSClosser/python-data-structures)
 
 # Implement Data Structures In Python
 

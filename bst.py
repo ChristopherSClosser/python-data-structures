@@ -19,13 +19,13 @@ class Bst(object):
     def __init__(self):
         """."""
         self.root = None
-        self.size = 0
+        self._size = 0
 
     def insert(self, val):
         """Insert a node into the tree."""
         if not self.root:
             self.root = Node(val)
-            self.size += 1
+            self._size += 1
             return
         current = self.root
         while True:
@@ -34,14 +34,14 @@ class Bst(object):
                     current = current.left
                 else:
                     current.left = Node(val)
-                    self.size += 1
+                    self._size += 1
                     break
             else:
                 if current.right:
                     current = current.right
                 else:
                     current.right = Node(val)
-                    self.size += 1
+                    self._size += 1
                     break
 
     def search(self, val):
@@ -66,14 +66,14 @@ class Bst(object):
 
     def size(self):
         """."""
-        return self.size
+        return self._size
 
-    def depth(self):
+    def depth(self, root):
         """."""
-        if self.root is None:
+        if root is None:
             return 0
         else:
-            return max(self.depth(self.root.left), self.depth(self.root.right)) + 1
+            return max(self.depth(root.left), self.depth(root.right)) + 1
 
     def contains(self, val):
         """."""
@@ -81,6 +81,9 @@ class Bst(object):
             return True
         return False
 
-    def balance(self):
+    def balance(self, root):
         """."""
-        pass
+        if root is None:
+            return 0
+        else:
+            return (self.depth(root.left)) - (self.depth(root.right))

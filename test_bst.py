@@ -71,7 +71,6 @@ def test_search_left(bst):
     bst.insert(3)
     bst.insert(5)
     bst.insert(2)
-    bst.insert(4)
     bst.insert(1)
     assert bst.search(2).val == 2
 
@@ -116,3 +115,77 @@ def test_add_nodes_to_bst_check_balance(bst):
     bst.insert(6)
     bst.insert(7)
     assert bst.balance(bst.root) == -1
+
+
+def test_inorder(bst):
+    """."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.in_order(bst.root)
+    res = list(tree)
+    assert res == [1, 2, 3, 4, 5, 6, 7, 8]
+
+
+def test_preorder(bst):
+    """."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.pre_order(bst.root)
+    res = list(tree)
+    assert res == [5, 3, 2, 1, 4, 6, 7, 8]
+
+
+def test_postorder(bst):
+    """."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.post_order(bst.root)
+    res = list(tree)
+    assert res == [1, 2, 4, 3, 8, 7, 6, 5]
+
+
+def test_breadth_first(bst):
+    """."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.breadth_first_traversal(bst.root.val)
+    res = list(tree)
+    assert res == [5, 3, 6, 2, 4, 7, 1, 8]
+
+
+def test_breadth_first_no_val(bst):
+    """."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.breadth_first_traversal(9)
+    assert tree.__next__() == 'node not found'

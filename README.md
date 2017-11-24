@@ -15,7 +15,8 @@
   - Queue
   - Dequeue
   - priority queue
-  - binary heap
+  - binary min heap 
+  - Binary search tree
 - Method time complexity
   - push() O(1)
   - pop() O(1)
@@ -42,12 +43,17 @@
   - has_node() O(n)
   - neighbors() O(n)
   - adjacent() O(n)
-  - depth_first_traversal() O(n^2)
-  - breadth_first_traversal() O(n^2)
+  - heap depth_first_traversal() O(n^2)
+  - heap breadth_first_traversal() O(n^2)
+  - Bst insert() O(log-n)
+  - Bst search(), contains() O(log-n)
+  - Bst size() O(1)
+  - Bst depth() O(n)
+  - Bst balance() O(n)
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
-  You can fork or clone the repository [here](https://github.com/maxawolff/data-structures)
+  You can fork or clone the repository [here](https://github.com/ChristopherSClosser/python-data-structures)
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->

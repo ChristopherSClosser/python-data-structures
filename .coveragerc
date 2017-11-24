@@ -8,4 +8,4 @@ include=stack.py,
         linked_list.py,
         priorityq.py,
         que_.py,
-        
+        bst.py

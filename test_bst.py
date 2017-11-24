@@ -73,6 +73,7 @@ def test_search_left(bst):
     bst.insert(2)
     bst.insert(4)
     bst.insert(1)
+    import pdb; pdb.set_trace()
     assert bst.search(2).val == 2
 
 

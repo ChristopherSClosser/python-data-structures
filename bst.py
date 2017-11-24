@@ -88,19 +88,27 @@ class Bst(object):
         else:
             return (self.depth(root.left)) - (self.depth(root.right))
 
+    def in_order(self, node):
+        """."""
+        if node:
+            yield from self.in_order(node.left)
+            yield (node.val)
+            yield from self.in_order(node.right)
 
-def breadth_first_traversal(self, start_val):
-    """."""
-    if not self.search(start_val):
-        yield 'node not found'
-    current = self.search(start_val)
-    yield current.val
-    queue = [current.val]
-    while len(queue) > 0:
-        current = queue.pop(0)
-        if current.left:
-            queue.append(current.left)
-            yield current.left.val
-        if current.right:
-            queue.append(current.right)
-            yield current.right.val
+    def breadth_first_traversal(self, val):
+        """."""
+        if not val:
+            yield 'no value entered'
+        if not self.search(val):
+            yield 'node not found'
+        current = self.search(val)
+        yield current.val
+        queue = [current]
+        while len(queue) > 0:
+            current = queue.pop(0)
+            if current.left:
+                queue.append(current.left)
+                yield current.left.val
+            if current.right:
+                queue.append(current.right)
+                yield current.right.val

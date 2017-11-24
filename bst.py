@@ -101,15 +101,22 @@ class Bst(object):
         """."""
         if node:
             yield node.val
-            for val in self.in_order(node.left):
+            for val in self.pre_order(node.left):
                 yield val
-            for val in self.in_order(node.right):
+            for val in self.pre_order(node.right):
                 yield val
+
+    def post_order(self, node):
+        """."""
+        if node:
+            for val in self.post_order(node.left):
+                yield val
+            for val in self.post_order(node.right):
+                yield val
+            yield node.val
 
     def breadth_first_traversal(self, val):
         """."""
-        if not val:
-            yield 'no value entered'
         if not self.search(val):
             yield 'node not found'
         current = self.search(val)

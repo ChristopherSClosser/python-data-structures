@@ -97,6 +97,15 @@ class Bst(object):
             for val in self.in_order(node.right):
                 yield val
 
+    def pre_order(self, node):
+        """."""
+        if node:
+            yield node.val
+            for val in self.in_order(node.left):
+                yield val
+            for val in self.in_order(node.right):
+                yield val
+
     def breadth_first_traversal(self, val):
         """."""
         if not val:

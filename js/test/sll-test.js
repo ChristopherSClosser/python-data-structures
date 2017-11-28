@@ -52,4 +52,52 @@ describe('SLL.prototypes', function() {
       expect(midIndex).to.equal(5);
     });
   });
+
+  describe('.nthNode()', function() {
+    let list = new SLL();
+    list.append(1); list.append(2); list.append(3);
+    list.append(4); list.append(5);
+
+    it('should return the last node', () => {
+      let findLast = list.nthNode(1);
+
+      expect(findLast.next).to.equal(null);
+    });
+
+    it('should return the second to the last node', () => {
+      let find = list.nthNode(2);
+
+      expect(find.next.next).to.equal(null);
+    });
+
+    it('should return list head node', () => {
+      let find = list.nthNode(5);
+
+      expect(find).to.equal(list.head);
+    });
+  });
+
+  describe('.remove()', function() {
+    let list = new SLL();
+    list.append(1); list.append(2); list.append(3);
+    list.append(4); list.append(5);
+
+    it('should remove the head', () => {
+      list.remove(0);
+
+      expect(list.head.val).to.deep.equal(2);
+    });
+
+    it('should remove the last node', () => {
+      list.remove(3);
+
+      expect(list.head.next.next.next).to.deep.equal(null);
+    });
+
+    it('should have only two nodes left', () => {
+      list.remove(1);
+
+      expect(list.head.next.next).to.deep.equal(null);
+    });
+  });
 });

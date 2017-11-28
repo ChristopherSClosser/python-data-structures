@@ -174,6 +174,7 @@ def test_breadth_first(bst):
     bst.insert(1)
     tree = bst.breadth_first_traversal(bst.root.val)
     res = list(tree)
+    import pdb; pdb.set_trace()
     assert res == [5, 3, 6, 2, 4, 7, 1, 8]
 
 
@@ -189,3 +190,11 @@ def test_breadth_first_no_val(bst):
     bst.insert(1)
     tree = bst.breadth_first_traversal(9)
     assert tree.__next__() == 'node not found'
+
+
+def test_delete(bst):
+    """."""
+    bst.insert(3)
+    bst.insert(5)
+    bst.insert(2)
+    bst.insert(1)

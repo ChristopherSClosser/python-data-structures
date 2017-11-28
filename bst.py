@@ -64,6 +64,41 @@ class Bst(object):
         else:
             return self._search(val, current.right)
 
+    def delete(self, val):
+        """."""
+        if not self.root:
+            return
+        current = self.root
+        return self._delete(current, val)
+
+    def _min_node(self, node):
+        """."""
+        current = node
+        while current.left:
+            current = current.left
+
+        return current
+
+    def _delete(self, node, val):
+        """."""
+        if node:
+            if val < node.val:
+                node.left = self._delete(node.left, val)
+            elif val > node.val:
+                node.right = self._delete(node.right, val)
+            else:
+                if not node.left:
+                    hold = node.right
+                    node = None
+                    return
+                elif not node.right:
+                    hold = node.left
+                    node = None
+                    return
+                hold = self._min_node(node.right)
+                node.val = hold.val
+                node.right = self._delete(node.right, hold.val)
+
     def size(self):
         """."""
         return self._size

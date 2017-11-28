@@ -174,7 +174,6 @@ def test_breadth_first(bst):
     bst.insert(1)
     tree = bst.breadth_first_traversal(bst.root.val)
     res = list(tree)
-    import pdb; pdb.set_trace()
     assert res == [5, 3, 6, 2, 4, 7, 1, 8]
 
 

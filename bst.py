@@ -66,22 +66,20 @@ class Bst(object):
         else:
             return self._search(val, current.right)
 
-    # def delete(self, val):
-    #     """."""
-    #     return self.search(val), val
-
     def _min_node(self, node):
         """."""
-        current = node
-        while current.left:
-            current = current.left
-        return current
+        while node.left:
+            node = node.left
+        return node
+
+    def _max_node(self, node):
+        """."""
+        while node.right:
+            node = node.right
+        return node
 
     def delete(self, val):
-        """Delete a node of a given value from the bst.
-        Replace deleted node with closest number to deleted node
-        left most child of right neighbor, not right neighbor
-        """
+        """Delete a node of a given value from the bst."""
 
         del_node = self.search(val)
         if not del_node:
@@ -89,23 +87,23 @@ class Bst(object):
         if del_node == self.root:
             if del_node.right:
                 min_node = self._min_node(del_node.right)
-                if min_node:
-                    self.root = min_node
-                else:
-                    min_node = del_node.right
-                    self.root = min_node
-                    min_node.parent = None
-                    if del_node.left:
-                        min_node.left = del_node.left
-                        del_node.left.parent = min_node
-
+                self.root = min_node
                 min_node.parent = None
                 del_node.right.parent = min_node
                 min_node.right = del_node.right
+                if del_node.left:
+                    min_node.left = del_node.left
+                    del_node.left.parent = min_node
+
+                return  # Done deal with depth and size
 
             elif del_node.left:
-                self.root = del_node.left
-                
+                max_node = self._max_node(del_node.left)
+                self.root = max_node
+                del_node.left.parent = max_node
+
+
+
             return
         direction = ""
         if del_node.parent.right is del_node:
@@ -157,50 +155,6 @@ class Bst(object):
                 min_node.left = del_node.left
                 del_node.left.parent = min_node
         self._size -= 1
-
-
-
-    # def _delete(self, node, val):
-    #     """."""
-    #     if not node.par
-    #         if node.right and node.left:
-    #             r_child = node.right
-    #             l_child = node.left
-    #             import pdb; pdb.set_trace()
-    #             if node.parent:
-    #                 if node.parent.left == l_child:
-    #                     l_child.right = node.parent.right
-    #                     node.parent.left = l_child.right
-    #                     l_child.right.parent = node.parent
-    #                     self.size -= 1
-    #                     import pdb; pdb.set_trace()
-    #                 else:
-    #                     r_child.right = node.parent.left
-    #                     node.parent.right = r_child.right
-    #                     self.size -= 1
-    #                     import pdb; pdb.set_trace()
-    #                 node.parent.left = node.left
-    #                 node.parent.right = node.right
-    #                 self.size -= 1
-    #             else:
-    #                 # deleting root need to find smallest node in the rightsubtree make it the root relplace all pointers
-    #
-    #         else:
-    #             if node.left:
-    #                 node.parent.left = node.left
-    #                 self.size -= 1
-    #             else:
-    #                 node.parent.right = node.right
-    #                 self.size -= 1
-    #     # else:
-    #     #     if node.val > val:
-    #     #         if node.left:
-    #     #             node = node.left
-    #     #             self._delete(node, val)
-    #     #     elif node.val < val:
-    #     #         if node.right:
-    #     #             node = node.right
-    #     #             self._delete(node, val)
 
     def size(self):
         """."""

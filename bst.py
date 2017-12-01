@@ -85,6 +85,11 @@ class Bst(object):
             min_node = self._min_node(del_node.right)
             self.root = min_node
             min_node.parent = None
+            if min_node == del_node.right.left:
+                if min_node.right:
+                    del_node.right.left = min_node.right
+                else:
+                    del_node.right.left = None
             del_node.right.parent = min_node
             min_node.right = del_node.right
             if del_node.left:
@@ -97,6 +102,11 @@ class Bst(object):
             max_node = self._max_node(del_node.left)
             self.root = max_node
             max_node.parent = None
+            if max_node == del_node.left.right:
+                if max_node.left:
+                    del_node.left.right = max_node.left
+                else:
+                    del_node.left.right = None
             del_node.left.parent = max_node
             max_node.left = del_node.left
             del_node = None
@@ -145,9 +155,10 @@ class Bst(object):
         if not del_node:
             raise ValueError('node not in tree')
         if del_node == self.root:
+            # import pdb; pdb.set_trace()
             self._delete_root(del_node)
             return
-        if del_node.right:
+        elif del_node.right:
             self._del_right_min(del_node.right)
             return
         elif del_node.left:
@@ -155,6 +166,7 @@ class Bst(object):
             return
         else:
             self._del_no_child(del_node)
+        return
 
     def size(self):
         """."""

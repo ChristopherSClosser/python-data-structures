@@ -82,7 +82,6 @@ class Bst(object):
             self._del_left_max(del_node)
             return
         else:
-            # import pdb; pdb.set_trace()
             self._del_no_child(del_node)
         return
 
@@ -195,7 +194,7 @@ class Bst(object):
         self._size -= 1
 
     def _del_left_max(self, node):
-        """If node to delete has no right child."""
+        """If node has no right child or right child has only one sibling."""
         del_node = node
         max_node = self._max_node(del_node.left)
         del_node.parent.right = max_node

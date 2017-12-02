@@ -9,7 +9,6 @@ class Node(object):
         self.val = val
         self.left = None
         self.right = None
-        self.level = None
         self.parent = None
 
 
@@ -23,6 +22,8 @@ class Bst(object):
 
     def insert(self, val):
         """Insert a node into the tree."""
+        if self.search(val):
+            raise ValueError('node already exists')
         if not self.root:
             self.root = Node(val)
             self._size += 1
@@ -75,10 +76,10 @@ class Bst(object):
             self._delete_root(del_node)
             return
         elif del_node.right:
-            self._del_right_min(del_node.right)
+            self._del_right_min(del_node)
             return
         elif del_node.left:
-            self._del_left_max(del_node.left)
+            self._del_left_max(del_node)
             return
         else:
             self._del_no_child(del_node)
@@ -143,6 +144,22 @@ class Bst(object):
                 del_node.right.left = min_node.right
             else:
                 del_node.right.left = None
+        elif min_node == del_node.right:
+            if del_node.left.right:
+                del_node.left.parent = del_node.parent
+                del_node.right.parent = del_node.left.right
+                del_node.left.right.right = del_node.right
+                del_node.parent.right = del_node.left
+                del_node = None
+                self._size -= 1
+                return
+            del_node.left.parent = del_node.parent
+            del_node.parent.right = del_node.left
+            del_node.right.parent = del_node.left
+            del_node.left.right = del_node.right
+            del_node = None
+            self._size -= 1
+            return
         del_node.right.parent = min_node
         min_node.right = del_node.right
         if del_node.left:

@@ -202,8 +202,8 @@ class Bst(object):
         max_node.parent = del_node.parent
         if max_node == del_node.left.right:
             if max_node.left:
-                del_node.left.right = max_node.right
-                max_node.right.parent = del_node.left
+                del_node.left.right = max_node.left
+                max_node.left.parent = del_node.left
             else:
                 del_node.left.right = None
         del_node.left.parent = max_node
@@ -221,7 +221,6 @@ class Bst(object):
         if del_node.parent.right == del_node:
             del_node.parent.right = None
         else:
-            # import pdb; pdb.set_trace()
             del_node.parent.left = None
         del_node = None
         self._size -= 1

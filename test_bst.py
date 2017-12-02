@@ -226,6 +226,6 @@ def test_delete(bst):
     bst.insert(2.6)
     bst.insert(4)
     bst.insert(2.55)
+    # bst.delete(3)
     tree = bst.pre_order(bst.root)
     tl = list(tree)
-    import pdb; pdb.set_trace()

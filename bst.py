@@ -201,7 +201,7 @@ class Bst(object):
         del_node.parent.right = max_node
         max_node.parent = del_node.parent
         if max_node == del_node.left.right:
-            if max_node.right:
+            if max_node.left:
                 del_node.left.right = max_node.right
                 max_node.right.parent = del_node.left
             else:

@@ -82,6 +82,7 @@ class Bst(object):
             self._del_left_max(del_node)
             return
         else:
+            # import pdb; pdb.set_trace()
             self._del_no_child(del_node)
         return
 
@@ -140,11 +141,36 @@ class Bst(object):
         min_node = self._min_node(del_node.right)
         min_node.parent = del_node.parent
         if min_node == del_node.right.left:
-            if min_node.right:
-                del_node.right.left = min_node.right
-            else:
-                del_node.right.left = None
+            del_node.parent.left = min_node
+            if del_node.left:
+                min_node.left = del_node.left
+                del_node.left.parent = min_node
+                if min_node.right:
+                    del_node.right.left = min_node.right
+                    min_node.right.parent = del_node.right
+                    min_node.right = del_node.right
+                    del_node.right.parent = min_node
+                    del_node = None
+                    self._size -= 1
+                    return
+                else:
+                    min_node.right = del_node.right
+                    del_node.right.parent = min_node
+                    del_node.right.left = None
+                    del_node = None
+                    self._size -= 1
+                    return
         elif min_node == del_node.right:
+            if del_node.left.right:
+                self._del_left_max(del_node)
+                return
+            if del_node.left:
+                min_node.left = del_node.left
+                del_node.parent.left = min_node
+                del_node.left.parent = min_node
+                del_node = None
+                self._size -= 1
+                return
             if del_node.left.right:
                 del_node.left.parent = del_node.parent
                 del_node.right.parent = del_node.left.right
@@ -172,14 +198,19 @@ class Bst(object):
         """If node to delete has no right child."""
         del_node = node
         max_node = self._max_node(del_node.left)
+        del_node.parent.right = max_node
         max_node.parent = del_node.parent
         if max_node == del_node.left.right:
-            if max_node.left:
-                del_node.left.right = max_node.left
+            if max_node.right:
+                del_node.left.right = max_node.right
+                max_node.right.parent = del_node.left
             else:
                 del_node.left.right = None
         del_node.left.parent = max_node
         max_node.left = del_node.left
+        if del_node.right:
+            del_node.right.parent = max_node
+            max_node.right = del_node.right
         del_node = None
         self._size -= 1
         return
@@ -190,9 +221,11 @@ class Bst(object):
         if del_node.parent.right == del_node:
             del_node.parent.right = None
         else:
+            # import pdb; pdb.set_trace()
             del_node.parent.left = None
         del_node = None
         self._size -= 1
+        return
 
     def size(self):
         """."""

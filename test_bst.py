@@ -191,6 +191,27 @@ def test_breadth_first_no_val(bst):
     assert tree.__next__() == 'node not found'
 
 
+# def test_delete(bst):
+#     """."""
+#     bst.insert(4)
+#     bst.insert(2)
+#     bst.insert(6)
+#     bst.insert(1)
+#     bst.insert(3)
+#     bst.insert(5)
+#     bst.insert(7)
+#     bst.delete(4)
+#     bst.insert(2.5)
+#     bst.insert(2.6)
+#     bst.delete(2)
+#     bst.delete(2.6)
+#     bst.delete(2.5)
+#
+#     tree = bst.pre_order(bst.root)
+#     tl = list(tree)
+#     import pdb; pdb.set_trace()
+
+
 def test_delete(bst):
     """."""
     bst.insert(4)
@@ -201,8 +222,10 @@ def test_delete(bst):
     bst.insert(5)
     bst.insert(7)
     bst.delete(4)
-    bst.insert(5.5)
-    bst.insert(5.6)
+    bst.insert(2.5)
+    bst.insert(2.6)
+    bst.insert(4)
+
     tree = bst.pre_order(bst.root)
     tl = list(tree)
     import pdb; pdb.set_trace()

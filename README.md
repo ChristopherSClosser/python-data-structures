@@ -24,6 +24,7 @@
     - balance() O(n)
     - traversals O(n)
     - delete() O(n)
+    - balance() O(n^2)
 - Method time complexity
   - push() O(1)
   - pop() O(1)

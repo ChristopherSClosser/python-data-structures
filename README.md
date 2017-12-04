@@ -17,6 +17,11 @@
   - priority queue
   - binary min heap
   - Binary search tree
+  - HashTable
+    - hash() O(1)
+    - set() O(n)
+    - extend() O(n)
+    - get() O(n)
 - Method time complexity
   - push() O(1)
   - pop() O(1)

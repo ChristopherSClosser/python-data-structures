@@ -35,13 +35,9 @@ class HashTable(object):
 
     def extend(self, entry, key, val):
         """."""
-        while entry and entry.key != key:
-            prev = entry
+        while entry.next:
             entry = entry.next
-            if entry:
-                entry.val = val
-            else:
-                prev.next = HtNode(key, val)
+        entry.next = HtNode(key, val)
 
     def get(self, key):
         """."""

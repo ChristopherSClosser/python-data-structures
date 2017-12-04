@@ -17,14 +17,11 @@
   - priority queue
   - binary min heap
   - Binary search tree
-    - insert() O(log-n)
-    - search(), contains() O(log-n)
-    - size() O(1)
-    - depth() O(n)
-    - balance() O(n)
-    - traversals O(n)
-    - delete() O(n)
-    - balance() O(n^2)
+  - HashTable
+    - hash() O(1)
+    - set() O(n)
+    - extend() O(n)
+    - get() O(n)
 - Method time complexity
   - push() O(1)
   - pop() O(1)

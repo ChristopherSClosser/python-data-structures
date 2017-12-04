@@ -109,8 +109,8 @@ class Bst(object):
                     del_node.right.left = min_node.right
                 else:
                     del_node.right.left = None
-            del_node.right.parent = min_node
-            min_node.right = del_node.right
+                del_node.right.parent = min_node
+                min_node.right = del_node.right
             if del_node.left:
                 min_node.left = del_node.left
                 del_node.left.parent = min_node

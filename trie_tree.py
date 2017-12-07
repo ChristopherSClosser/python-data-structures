@@ -39,3 +39,19 @@ class Trie(object):
         set_end = current.children.setdefault('$', new_end)
         if set_end is new_end:
             self._size += 1
+
+    def contains(self, word):
+        """Check if the given word is in the Trie tree."""
+        if not isinstance(word, str):
+            raise TypeError('Can only check for words in the trie.')
+
+        current = self.root
+        for char in word + '$':
+            if char not in current.children:
+                return False
+            current = current.children[char]
+        return True
+
+    def size(self):
+        """Get the number of words in the Trie tree."""
+        return self._size

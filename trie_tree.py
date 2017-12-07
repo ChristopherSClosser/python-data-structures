@@ -55,3 +55,23 @@ class Trie(object):
     def size(self):
         """Get the number of words in the Trie tree."""
         return self._size
+
+    def remove(self, word):
+        """Remove the given word from the Trie tree."""
+        if not isinstance(word, str):
+            raise TypeError('You can only remove a word from the trie.')
+
+        current = self.root
+        for char in word + '$':
+            if char not in current.children:
+                raise ValueError('The word is not in the trie.')
+            current = current.children[char]
+
+        current = current.parent
+        last_char = '$'
+        while len(current.children) == 1 and current.val != '*':
+            last_char = current.val
+            current = current.parent
+
+        del current.children[last_char]
+        self._size -= 1

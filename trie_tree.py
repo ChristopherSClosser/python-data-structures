@@ -75,3 +75,25 @@ class Trie(object):
 
         del current.children[last_char]
         self._size -= 1
+
+    def traverse(self, ichar=''):
+        """."""
+        if not isinstance(ichar, str):
+            raise TypeError('must be a letter or empty string, ""')
+
+        def depth(node, init):
+            """Get all node vals depth first."""
+            if not node:
+                return
+            if node.val != '*' and node.val != '$' and not init:
+                yield node.val
+            for child in node.children:
+                for val in depth(node.children[child], False):
+                    yield val
+        current = self.root
+        for child in ichar:
+            if child not in current.children:
+                current = None
+                break
+            current = current.children[child]
+        return depth(current, True)

@@ -4,9 +4,9 @@
 class Node(object):
     """Node for a Trie tree."""
 
-    def __init__(self, value, parent=None):
+    def __init__(self, val, parent=None):
         """Create a node with the given value."""
-        self.val = value
+        self.val = val
         self.parent = parent
         self.children = {}
 

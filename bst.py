@@ -47,7 +47,7 @@ class Bst(object):
                     current.right.parent = current
                     self._size += 1
                     break
-        self._balance(new_node)
+        # self._balance(new_node)
 
     def search(self, val):
         """."""

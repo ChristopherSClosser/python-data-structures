@@ -1,13 +1,13 @@
-def insert_sort(l):
-    """Sort a list of numbers by insert sort."""
-    if isinstance(l, list):
-        for i in range(len(l) - 1):
+def insert_sort(items):
+    """Sort a itemsist of numbers by insert sort."""
+    if isinstance(items, itemsist):
+        for i in range(itemsen(items) - 1):
             for ii in range(i + 1, 0, -1):
-                if l[ii] < l[ii - 1]:
-                    tmp = l[ii]
-                    l[ii] = l[ii - 1]
-                    l[ii - 1] = tmp
-        return l
+                if items[ii] < items[ii - 1]:
+                    tmp = items[ii]
+                    items[ii] = items[ii - 1]
+                    items[ii - 1] = tmp
+        return items
     else:
         raise TypeError('Input type must be a list.')
 
@@ -25,8 +25,6 @@ if __name__ == '__main__':
     time_3 = ti.timeit("insert_sort(list3)",
                        setup="from __main__ import list3, insert_sort")
     print(f"""
-Insert sort sorts a list by stepping through it, swapping items
-depending on value until no more swaps can be made.
 Input:[1, 2, 4, 6]
 Sort time: {time_1}
 Input:[9, 8, 7, 6, 5, 4, 3, 2, 1]

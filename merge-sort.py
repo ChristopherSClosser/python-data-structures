@@ -1,19 +1,19 @@
-def merge_sort(seq):
-    """Sort sequence by merge sort."""
-    if isinstance(seq, list):
-        mid = len(seq) // 2
-        left, right = seq[:mid], seq[mid:]
+def merge_sort(items):
+    """Sort itemsuence by merge sort."""
+    if isinstance(items, list):
+        mid = len(items) // 2
+        left, right = items[:mid], items[mid:]
         if len(left) > 1:
             left = merge_sort(left)
         if len(right) > 1:
             right = merge_sort(right)
-        sorted_seq = []
+        sorted_items = []
         while left and right:
             if left[-1] >= right[-1]:
-                sorted_seq.insert(0, left.pop())
+                sorted_items.insert(0, left.pop())
             else:
-                sorted_seq.insert(0, right.pop())
-        return list(left or right) + sorted_seq
+                sorted_items.insert(0, right.pop())
+        return list(left or right) + sorted_items
     else:
         raise TypeError('Input type must be a list.')
 

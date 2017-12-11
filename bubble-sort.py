@@ -1,17 +1,16 @@
 def bubble_sort(items):
     """Bubble sort function."""
-    if isinstance(items, list):
-        swaps = 1
-        while swaps:
-            swaps = 0
-            for i in range(len(items) - 1):
-                if items[i] > items[i + 1]:
-                    items[i], items[i + 1] = items[i + 1], items[i]
-                    swaps += 1
-            if swaps == 0:
-                return items
-    else:
+    if not isinstance(items, list):
         raise TypeError('Function only accepts lists')
+    swaps = 1
+    while swaps:
+        swaps = 0
+        for i in range(len(items) - 1):
+            if items[i] > items[i + 1]:
+                items[i], items[i + 1] = items[i + 1], items[i]
+                swaps += 1
+        if swaps == 0:
+            return items
 
 
 if __name__ == '__main__':  # pragma no cover

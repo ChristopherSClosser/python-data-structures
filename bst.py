@@ -9,7 +9,6 @@ class Node(object):
         self.val = val
         self.left = None
         self.right = None
-        self.level = None
         self.parent = None
 
 
@@ -46,6 +45,8 @@ class Bst(object):
 
     def search(self, val):
         """."""
+        if not val:
+            raise ValueError('you must enter a value to search')
         if self.root:
             node_found = self._search(val, self.root)
             if node_found:
@@ -55,7 +56,7 @@ class Bst(object):
 
     def _search(self, val, current):
         """."""
-        if not current or not val:
+        if not current:
             return None
         elif current.val == val:
             return current
@@ -68,12 +69,19 @@ class Bst(object):
         """."""
         return self._size
 
-    def depth(self, root):
+    def depth(self):
         """."""
-        if root is None:
+        if not self.root:
             return 0
         else:
-            return max(self.depth(root.left), self.depth(root.right)) + 1
+            return self._depth(self.root)
+
+    def _depth(self, root):
+        """."""
+        if not root:
+            return 0
+        else:
+            return max(self._depth(root.left), self._depth(root.right)) + 1
 
     def contains(self, val):
         """."""
@@ -86,4 +94,4 @@ class Bst(object):
         if root is None:
             return 0
         else:
-            return (self.depth(root.left)) - (self.depth(root.right))
+            return (self._depth(root.left)) - (self._depth(root.right))

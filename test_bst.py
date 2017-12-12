@@ -103,7 +103,7 @@ def test_add_nodes_to_bst_check_depth(bst):
     bst.insert(2)
     bst.insert(4)
     bst.insert(1)
-    assert bst.depth(bst.root) == 3
+    assert bst.depth() == 3
 
 
 def test_add_nodes_to_bst_check_balance(bst):

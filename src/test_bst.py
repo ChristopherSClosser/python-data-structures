@@ -167,7 +167,7 @@ def test_add_nodes_to_bst_check_balance_0(bst):
     assert bst.balance(bst.root) == 0
 
 
-@pytest.mark.parametrize('nums', [num for num in range(1, 40)])
+@pytest.mark.parametrize('nums', [num for num in range(1, 20)])
 def test_sample_of_insertions_size(nums):
     """Test_sample_of_insertions_size."""
     items = random.sample(range(1, 100), 99)
@@ -177,8 +177,94 @@ def test_sample_of_insertions_size(nums):
     assert test.size() == 99
 
 
-@pytest.mark.parametrize('nums', [num for num in range(1, 40)])
+@pytest.mark.parametrize('nums', [num for num in range(1, 20)])
 def test_search_random(bst_2, nums):
     """test_search_random."""
     find = random.sample(range(1, 7), 1)
     assert bst_2.search(find[0]).val == find[0]
+
+
+def test_inorder(bst):
+    """test_inorder."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.in_order(bst.root)
+    res = list(tree)
+    assert res == [1, 2, 3, 4, 5, 6, 7, 8]
+
+
+def test_preorder(bst):
+    """test_preorder."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.pre_order(bst.root)
+    res = list(tree)
+    assert res == [5, 3, 2, 1, 4, 6, 7, 8]
+
+
+def test_postorder(bst):
+    """test_postorder."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.post_order(bst.root)
+    res = list(tree)
+    assert res == [1, 2, 4, 3, 8, 7, 6, 5]
+
+
+def test_breadth_first(bst):
+    """test_breadth_first."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.breadth_first_traversal(bst.root.val)
+    res = list(tree)
+    assert res == [5, 3, 6, 2, 4, 7, 1, 8]
+
+
+def test_breadth_first_no_val(bst):
+    """test_breadth_first_no_val."""
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(1)
+    tree = bst.breadth_first_traversal(9)
+    assert next(tree) == 'node not found'
+
+
+@pytest.mark.parametrize('nums', [num for num in range(1, 20)])
+def test_inorder_multiple(nums):
+    """test_inorder_multiple."""
+    nums = random.sample(range(1, 100), 99)
+    test = Bst()
+    for i in nums:
+        test.insert(i)
+    nums = sorted(nums)
+    gen = test.in_order(test.root)
+    assert [i for i in gen] == nums

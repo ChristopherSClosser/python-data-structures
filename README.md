@@ -17,6 +17,17 @@
   - priority queue
   - binary min heap
   - Binary search tree
+    - insert() O(log-n)
+    - search(), contains() O(log-n)
+    - size() O(1)
+    - depth() O(n)
+    - balance() O(n)
+    - traversals O(n)
+      - breadth_first_traversal
+      - in_order
+      - pre_order
+      - post_order
+    - delete() O(n)
 - Method time complexity
   - push() O(1)
   - pop() O(1)
@@ -45,12 +56,6 @@
   - adjacent() O(n)
   - heap depth_first_traversal() O(n^2)
   - heap breadth_first_traversal() O(n^2)
-  - Bst insert() O(log-n)
-  - Bst search(), contains() O(log-n)
-  - Bst size() O(1)
-  - Bst depth() O(n)
-  - Bst balance() O(n)
-  - Bst traversals O(n)
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->

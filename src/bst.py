@@ -95,3 +95,46 @@ class Bst(object):
             return 0
         else:
             return (self._depth(root.left)) - (self._depth(root.right))
+
+    def in_order(self, node):
+        """Return generator with nodes ordered from least to greatest."""
+        if node:
+            for val in self.in_order(node.left):
+                yield val
+            yield node.val
+            for val in self.in_order(node.right):
+                yield val
+
+    def pre_order(self, node):
+        """Return generator with nodes starting left and down."""
+        if node:
+            yield node.val
+            for val in self.pre_order(node.left):
+                yield val
+            for val in self.pre_order(node.right):
+                yield val
+
+    def post_order(self, node):
+        """Return generator with nodes starting down and left."""
+        if node:
+            for val in self.post_order(node.left):
+                yield val
+            for val in self.post_order(node.right):
+                yield val
+            yield node.val
+
+    def breadth_first_traversal(self, val):
+        """Return generator list nodes left to right and down."""
+        if not self.search(val):
+            yield 'node not found'
+        current = self.search(val)
+        yield current.val
+        queue = [current]
+        while len(queue) > 0:
+            current = queue.pop(0)
+            if current.left:
+                queue.append(current.left)
+                yield current.left.val
+            if current.right:
+                queue.append(current.right)
+                yield current.right.val

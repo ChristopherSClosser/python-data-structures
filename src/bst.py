@@ -43,7 +43,7 @@ class Bst(object):
                     self._size += 1
                     break
 
-    def search(self, val):
+    def search(self, val=None):
         """Return node in tree if found."""
         if not val:
             raise ValueError('you must enter a value to search')

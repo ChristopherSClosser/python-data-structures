@@ -64,10 +64,21 @@ def test_search_bst(bst):
     assert bst.search(1).val == 1
 
 
+def test_search_no_val_enterd_bst(bst_2):
+    """test_search_bst."""
+    with pytest.raises(ValueError):
+        bst_2.search()
+
+
 def test_search_bst_node_not_in_tree(bst):
     """test_search_bst_node_not_in_tree."""
     bst.insert(1)
     assert bst.search(2) is None
+
+
+def test_depth_on_0(bst):
+    """test_depth_on_0."""
+    assert bst.depth() == 0
 
 
 def test_contains_bst_node(bst):

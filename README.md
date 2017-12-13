@@ -15,7 +15,7 @@
   - Queue
   - Dequeue
   - priority queue
-  - binary min heap 
+  - binary min heap
   - Binary search tree
 - Method time complexity
   - push() O(1)
@@ -50,6 +50,7 @@
   - Bst size() O(1)
   - Bst depth() O(n)
   - Bst balance() O(n)
+  - Bst traversals O(n)
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->

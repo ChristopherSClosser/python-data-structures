@@ -52,6 +52,12 @@ def test_add_node_to_bst(bst):
     assert bst.root.val == 1
 
 
+def test_add_0_to_bst(bst):
+    """test_add_node_to_bst."""
+    bst.insert(0)
+    assert bst.root.val == 0
+
+
 def test_search_bst(bst):
     """test_search_bst."""
     bst.insert(1)

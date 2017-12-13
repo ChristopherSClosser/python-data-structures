@@ -9,7 +9,6 @@ class Node(object):
         self.val = val
         self.left = None
         self.right = None
-        self.level = None
         self.parent = None
 
 
@@ -44,8 +43,10 @@ class Bst(object):
                     self._size += 1
                     break
 
-    def search(self, val):
-        """."""
+    def search(self, val=None):
+        """Return node in tree if found."""
+        if not val:
+            raise ValueError('you must enter a value to search')
         if self.root:
             node_found = self._search(val, self.root)
             if node_found:
@@ -54,8 +55,8 @@ class Bst(object):
         return None
 
     def _search(self, val, current):
-        """."""
-        if not current or not val:
+        """Helper for search."""
+        if not current:
             return None
         elif current.val == val:
             return current
@@ -65,68 +66,32 @@ class Bst(object):
             return self._search(val, current.right)
 
     def size(self):
-        """."""
+        """Return number of nodes in tree."""
         return self._size
 
-    def depth(self, root):
-        """."""
-        if root is None:
+    def depth(self):
+        """Return overall depth of tree."""
+        if not self.root:
             return 0
         else:
-            return max(self.depth(root.left), self.depth(root.right)) + 1
+            return self._depth(self.root)
+
+    def _depth(self, root):
+        """Helper for depth."""
+        if not root:
+            return 0
+        else:
+            return max(self._depth(root.left), self._depth(root.right)) + 1
 
     def contains(self, val):
-        """."""
+        """Return true if node with val is in tree."""
         if self._search(val, self.root):
             return True
         return False
 
     def balance(self, root):
-        """."""
+        """Return the difference in depth of left and right subtrees."""
         if root is None:
             return 0
         else:
-            return (self.depth(root.left)) - (self.depth(root.right))
-
-    def in_order(self, node):
-        """."""
-        if node:
-            for val in self.in_order(node.left):
-                yield val
-            yield node.val
-            for val in self.in_order(node.right):
-                yield val
-
-    def pre_order(self, node):
-        """."""
-        if node:
-            yield node.val
-            for val in self.pre_order(node.left):
-                yield val
-            for val in self.pre_order(node.right):
-                yield val
-
-    def post_order(self, node):
-        """."""
-        if node:
-            for val in self.post_order(node.left):
-                yield val
-            for val in self.post_order(node.right):
-                yield val
-            yield node.val
-
-    def breadth_first_traversal(self, val):
-        """."""
-        if not self.search(val):
-            yield 'node not found'
-        current = self.search(val)
-        yield current.val
-        queue = [current]
-        while len(queue) > 0:
-            current = queue.pop(0)
-            if current.left:
-                queue.append(current.left)
-                yield current.left.val
-            if current.right:
-                queue.append(current.right)
-                yield current.right.val
+            return (self._depth(root.left)) - (self._depth(root.right))

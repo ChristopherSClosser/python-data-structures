@@ -1,11 +1,11 @@
 [run]
-include=stack.py,
-        linked_list.py,
-        dequeue.py,
-        binary_heap.py,
-        dll.py,
-        graph.py,
-        linked_list.py,
-        priorityq.py,
-        que_.py,
-        bst.py
+include=src/stack.py,
+        src/linked_list.py,
+        src/dequeue.py,
+        src/binary_heap.py,
+        src/dll.py,
+        src/graph.py,
+        src/linked_list.py,
+        src/priorityq.py,
+        src/que_.py,
+        src/bst.py

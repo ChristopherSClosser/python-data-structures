@@ -9,6 +9,9 @@ __pycache__/
 node_modules
 
 notes.py
+node_modules/
+jspm_packages
+package-lock.json
 
 # Distribution / packaging
 .Python

@@ -44,7 +44,7 @@ class Bst(object):
                     break
 
     def search(self, val):
-        """."""
+        """Return node in tree if found."""
         if not val:
             raise ValueError('you must enter a value to search')
         if self.root:
@@ -55,7 +55,7 @@ class Bst(object):
         return None
 
     def _search(self, val, current):
-        """."""
+        """Helper for search."""
         if not current:
             return None
         elif current.val == val:
@@ -66,31 +66,31 @@ class Bst(object):
             return self._search(val, current.right)
 
     def size(self):
-        """."""
+        """Return number of nodes in tree."""
         return self._size
 
     def depth(self):
-        """."""
+        """Return overall depth of tree."""
         if not self.root:
             return 0
         else:
             return self._depth(self.root)
 
     def _depth(self, root):
-        """."""
+        """Helper for depth."""
         if not root:
             return 0
         else:
             return max(self._depth(root.left), self._depth(root.right)) + 1
 
     def contains(self, val):
-        """."""
+        """Return true if node with val is in tree."""
         if self._search(val, self.root):
             return True
         return False
 
     def balance(self, root):
-        """."""
+        """Return the difference in depth of left and right subtrees."""
         if root is None:
             return 0
         else:

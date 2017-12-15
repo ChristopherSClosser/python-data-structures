@@ -79,5 +79,3 @@ class Node(object):
         """Create a new node."""
         self.val = val
         self.next_node = next_node
-        self.prev_node = prev_node
-        self.priority = priority

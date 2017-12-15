@@ -1,6 +1,16 @@
 """Implementation of double linked list."""
 
-from linked_list import LinkedList, Node
+from linked_list import LinkedList
+
+
+class Node(object):
+    """Class for node."""
+
+    def __init__(self, val, next_node=None, prev_node=None, priority=0):
+        """Create a new node."""
+        self.val = val
+        self.next_node = next_node
+        self.prev_node = prev_node
 
 
 class DLL(LinkedList):
@@ -40,12 +50,14 @@ class DLL(LinkedList):
         if self.head is None:
             raise IndexError("List is empty, cannot pop from an empty list")
         val = self.head.val
-        if self.head.next_node:
-            self.head = self.head.next_node
-            self.head.prev_node = None
-        else:
+        if self.length == 1:
             self.head = None
             self.tail = None
+
+        else:
+            self.head = self.head.next_node
+            self.head.prev_node = None
+
         self.length -= 1
         return val
 
@@ -54,12 +66,13 @@ class DLL(LinkedList):
         if self.head is None:
             raise IndexError("List is empty, cannot pop from an empty list")
         val = self.tail.val
-        if self.tail.prev_node:
-            self.tail = self.tail.prev_node
-            self.tail.next_node = None
-        else:
+        if self.length == 1:
             self.head = None
             self.tail = None
+        else:
+            self.tail = self.tail.prev_node
+            self.tail.next_node = None
+
         self.length -= 1
         return val
 

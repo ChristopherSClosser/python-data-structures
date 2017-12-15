@@ -8,4 +8,3 @@ include=src/stack.py,
         src/linked_list.py,
         src/priorityq.py,
         src/que_.py,
-        src/bst.py

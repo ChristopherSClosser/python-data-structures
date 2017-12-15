@@ -29,6 +29,7 @@
     - _leftchild() O(log-n)
     - _rightchild() O(log-n)
   - Binary search tree
+<<<<<<< HEAD
     - insert() O(log-n)
     - search(), contains() O(log-n)
     - size() O(1)
@@ -40,6 +41,13 @@
       - pre_order
       - post_order
     - delete() O(n)
+=======
+  - HashTable
+    - hash() O(1)
+    - set() O(n)
+    - extend() O(n)
+    - get() O(n)
+>>>>>>> 1fda905a2b218447b9fff493719f87ae1447a4dc
 - Method time complexity
   - push() O(1)
   - pop() O(1)

@@ -1,8 +1,8 @@
-"""Implementation of binary search tree."""
+"""Implementation of Binheap."""
 
 
 class Binheap(object):
-    """Binary search tree."""
+    """Implement a min heap."""
 
     def __init__(self):
         """."""
@@ -12,9 +12,6 @@ class Binheap(object):
     def push(self, val):
         """Add new value."""
         self._tailidx += 1
-        # if self._tailidx < len(self.container):
-        #     self.container[self._tailidx] = val
-        # else:
         self.container.append(val)
         self._shiftup(self._tailidx)
 

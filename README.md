@@ -20,7 +20,14 @@
     - peek() O(1)
     - peekleft() O(1)
   - priority queue
-  - binary min heap
+  - Binary min heap
+    - push() O(1)
+    - pop() O(1)
+    - _shiftup() O(log-n)
+    - _shiftdown() O(log-n)
+    - _parent() O(log-n)
+    - _leftchild() O(log-n)
+    - _rightchild() O(log-n)
   - Binary search tree
     - insert() O(log-n)
     - search(), contains() O(log-n)

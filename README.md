@@ -14,6 +14,11 @@
   - Graph
   - Queue
   - Dequeue
+    - appendleft() O(1)
+    - pop() O(1)
+    - popleft() O(1)
+    - peek() O(1)
+    - peekleft() O(1)
   - priority queue
   - binary min heap
   - Binary search tree

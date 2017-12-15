@@ -17,23 +17,23 @@ def new_node():
     return Node(1)
 
 
-def test_new_emty_graph__nodes(new_graph):
-    """Test_new_emty_graph__nodes."""
-    assert new_graph._nodes == []
+def test_new_emty_graph_list_nodes(new_graph):
+    """Test_new_emty_graph_list_nodes."""
+    assert new_graph.list_nodes == []
 
 
-def test_new_emty_graph_nodes(new_graph):
-    """Test_new_emty_graph_nodes."""
+def test_new_emty_graphlist_nodes(new_graph):
+    """Test_new_emty_graphlist_nodes."""
     assert new_graph.nodes() == []
 
 
-def test_new_emty_graph__edges(new_graph):
-    """Test_new_emty_graph__edges."""
-    assert new_graph._edges == []
+def test_new_emty_graph_list_edges(new_graph):
+    """Test_new_emty_graph_list_edges."""
+    assert new_graph.list_edges == []
 
 
-def test_new_emty_graph_edges(new_graph):
-    """Test_new_emty_graph_edges."""
+def test_new_emty_graphlist_edges(new_graph):
+    """Test_new_emty_graphlist_edges."""
     assert new_graph.edges() == []
 
 
@@ -50,12 +50,12 @@ def test_del_node_doesnt_exist(new_graph):
 def test_insert_1node(new_graph):
     """Test_insert_1node."""
     new_graph.add_node(1)
-    assert new_graph._nodes[0].val == 1
+    assert new_graph.list_nodes[0].val == 1
 
 
 def test_newgraph_scope(new_graph):
     """Test fixture."""
-    assert new_graph._nodes == []
+    assert new_graph.list_nodes == []
 
 
 def test_insert_duplicate_node_raises_error(new_graph):
@@ -64,26 +64,26 @@ def test_insert_duplicate_node_raises_error(new_graph):
     assert new_graph.add_node(1) == "Nodes must have unique values"
 
 
-def test_add_edge_empty_graph_makes_nodes(new_graph):
+def test_add_edge_empty_graph_makeslist_nodes(new_graph):
     """Should make two new nodes and add to nodes list."""
     new_graph.add_edge(1, 2)
-    assert len(new_graph._nodes) == 2
+    assert len(new_graph.list_nodes) == 2
 
 
 def test_add_edge_empty_graph_makes_edge(new_graph):
     """Should add an edge."""
     new_graph.add_edge(1, 2)
-    assert new_graph._edges[0][0].val == 1
-    assert new_graph._edges[0][1].val == 2
+    assert new_graph.list_edges[0][0].val == 1
+    assert new_graph.list_edges[0][1].val == 2
 
 
-def test_add_edge_existing_nodes(new_graph):
-    """Test_add_edge_existing_nodes."""
+def test_add_edge_existinglist_nodes(new_graph):
+    """Test_add_edge_existinglist_nodes."""
     new_graph.add_node(1)
     new_graph.add_node(2)
     new_graph.add_edge(1, 2)
-    assert new_graph._edges[0][0].val == 1
-    assert new_graph._edges[0][1].val == 2
+    assert new_graph.list_edges[0][0].val == 1
+    assert new_graph.list_edges[0][1].val == 2
 
 
 def test_add_edge_same_node_error(new_graph):
@@ -107,23 +107,23 @@ def test_add_existing_edge_reversed(new_graph):
     new_graph.add_node(2)
     new_graph.add_edge(1, 2)
     new_graph.add_edge(2, 1)
-    assert new_graph._edges[1][0].val == 2
-    assert new_graph._edges[1][1].val == 1
+    assert new_graph.list_edges[1][0].val == 2
+    assert new_graph.list_edges[1][1].val == 1
 
 
 def test_add_edge_existing_node(new_graph):
     """Test_add_edge_existing_nod."""
     new_graph.add_node(1)
     new_graph.add_edge(1, 2)
-    assert new_graph._edges[0][0].val == 1
-    assert new_graph._edges[0][1].val == 2
+    assert new_graph.list_edges[0][0].val == 1
+    assert new_graph.list_edges[0][1].val == 2
 
 
-def test_del_node_deletes_nodes(new_graph):
-    """Test_del_node_deletes_nodes."""
+def test_del_node_deleteslist_nodes(new_graph):
+    """Test_del_node_deleteslist_nodes."""
     new_graph.add_node(1)
     new_graph.del_node(1)
-    assert new_graph._nodes == []
+    assert new_graph.list_nodes == []
 
 
 def test_del_node_deletes_node_1(new_graph):
@@ -131,7 +131,7 @@ def test_del_node_deletes_node_1(new_graph):
     new_graph.add_node(1)
     new_graph.add_node(2)
     new_graph.del_node(1)
-    assert new_graph._nodes[0].val == 2
+    assert new_graph.list_nodes[0].val == 2
 
 
 def test_del_node_deltes_edge(new_graph):
@@ -139,15 +139,15 @@ def test_del_node_deltes_edge(new_graph):
     ng = Graph()
     ng.add_edge(1, 2)
     ng.del_node(1)
-    assert ng._edges == []
+    assert ng.list_edges == []
 
 
 def test_del_node_deltes_neighbor(new_graph):
     """Test_del_node_deltes_neighbor."""
     ng = Graph()
     ng.add_edge(1, 2)
-    node1 = ng._nodes[0]
-    node2 = ng._nodes[1]
+    node1 = ng.list_nodes[0]
+    node2 = ng.list_nodes[1]
     assert node1.neighbors[0][0].val == node1.val
     assert node1.neighbors[0][1].val == node2.val
 
@@ -156,7 +156,7 @@ def test_only_one_edge(new_graph):
     """Test_only_one_edge."""
     ng = Graph()
     ng.add_edge(1, 2)
-    node1 = ng._nodes[0]
+    node1 = ng.list_nodes[0]
     with pytest.raises(IndexError):
         print(node1.neighbors[1][0].val)
 
@@ -165,7 +165,7 @@ def test_neighbors_function_returns_list_of_neighbors(new_graph):
     """Test_neighbors_function_returns_list_of_neighbors."""
     ng = Graph()
     ng.add_edge(1, 2)
-    node1 = ng._nodes[0]
+    node1 = ng.list_nodes[0]
     nlist = ng.neighbors(1)
     assert nlist[0][0] == node1
 
@@ -182,7 +182,7 @@ def test_remove_edge(new_graph):
     ng = Graph()
     ng.add_edge(1, 2)
     ng.del_edge(1, 2)
-    assert ng._edges == []
+    assert ng.list_edges == []
 
 
 def test_remove_edge_not_exist():
@@ -203,8 +203,8 @@ def test_remove_edge_also_removes_neighbors():
     """Test_remove_edge_also_removes_neighbors."""
     ng = Graph()
     ng.add_edge(1, 2)
-    node1 = ng._nodes[0]
-    # node2 = ng._nodes[1]
+    node1 = ng.list_nodes[0]
+    # node2 = ng.list_nodes[1]
     ng.del_edge(1, 2)
     assert node1.neighbors == []
 
@@ -244,9 +244,10 @@ def test_graph_depth_first_large():
     ng.add_edge(2, 3)
     ng.add_edge(3, 4)
     ng.add_edge(3, 5)
+    import pdb; pdb.set_trace()
     # print (ng.depth_first_traversal(1))
     assert ng.depth_first_traversal(1) == [1, 8, 12, 9, 11, 10, 7, 2, 3, 5, 4, 6]
-
+list_nodes
 
 def test_graph_depth_first_large_2():
     """Test_graph_depth_first_large_2."""
@@ -385,14 +386,14 @@ def test_zero_edge_weight():
     """Test default weight."""
     ng = Graph()
     ng.add_edge(1, 2)
-    assert ng._edges[0][2] == 0
+    assert ng.list_edges[0][2] == 0
 
 
 def test_edge_weight():
     """Test correct weight."""
     ng = Graph()
     ng.add_edge(1, 2, 1)
-    assert ng._edges[0][2] == 1
+    assert ng.list_edges[0][2] == 1
 
 
 def test_edge_weight_not_num():

@@ -4,10 +4,13 @@
 class Binheap(object):
     """Implement a min heap."""
 
-    def __init__(self):
+    def __init__(self, iterable=None):
         """."""
         self.container = []
         self._tailidx = -1
+        if isinstance(iterable, (str, tuple, list)):
+            for i in iterable:
+                self.push(i)
 
     def push(self, val):
         """Add new value."""

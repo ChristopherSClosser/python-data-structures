@@ -336,21 +336,12 @@ class Bst(object):
             return True
         return False
 
-<<<<<<< HEAD:src/bst.py
     def balance(self, root):
         """Return the difference in depth of left and right subtrees."""
         if root is None:
             return 0
         else:
             return (self._depth(root.left)) - (self._depth(root.right))
-=======
-    def balance(self, node):
-        """."""
-        if node is None:
-            return 0
-        else:
-            return (self.depth(node.left)) - (self.depth(node.right))
->>>>>>> 1fda905a2b218447b9fff493719f87ae1447a4dc:bst.py
 
     def in_order(self, node):
         """Return generator with nodes ordered from least to greatest."""

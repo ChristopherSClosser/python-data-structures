@@ -244,10 +244,10 @@ def test_graph_depth_first_large():
     ng.add_edge(2, 3)
     ng.add_edge(3, 4)
     ng.add_edge(3, 5)
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     # print (ng.depth_first_traversal(1))
     assert ng.depth_first_traversal(1) == [1, 8, 12, 9, 11, 10, 7, 2, 3, 5, 4, 6]
-list_nodes
+
 
 def test_graph_depth_first_large_2():
     """Test_graph_depth_first_large_2."""

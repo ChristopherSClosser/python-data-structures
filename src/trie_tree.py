@@ -108,37 +108,10 @@ class Trie(object):
                 sofar = sofar + key
                 self.next[key].search(string, sofar)
             else:
-                print "No match"
+                print("No match")
         else:
             if self.val == '$':
-                print "Match:", sofar
+                print("Match:", sofar)
 
             for key in self.next.keys():
                 self.next[key].traverse(sofar + key)
-
-
-def fileparse(filename):
-    """Parse the input dictionary file and build the trie data structure."""
-    fd = open(filename)
-
-    root = Node()
-    line = fd.readline().strip('\r\n')
-
-    while line != '':
-        root.add_item(line)
-        line = fd.readline().strip('\r\n')
-
-    return root
-
-
-if __name__ == '__main__':
-    import sys
-    if len(sys.argv) != 2:
-        print "Usage: ", sys.argv[0], "dictionary_file.txt"
-        sys.exit(2)
-
-    root = fileparse(sys.argv[1])
-
-    print "Input:",
-    input=raw_input()
-    root.search(input)

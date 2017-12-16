@@ -77,41 +77,41 @@ class Trie(object):
         del current.children[last_char]
         self._size -= 1
 
+    def depth(self, node, init):
+        """Get all node vals depth first."""
+        if not node:
+            return
+        if node.val != '*' and node.val != '$' and not init:
+            yield node.val
+        for child in node.children:
+            for val in self.depth(node.children[child], False):
+                yield val
+
     def traverse(self, ichar=''):
         """."""
         if not isinstance(ichar, str):
             raise TypeError('must be a letter or empty string, ""')
-
-        def depth(node, init):
-            """Get all node vals depth first."""
-            if not node:
-                return
-            if node.val != '*' and node.val != '$' and not init:
-                yield node.val
-            for child in node.children:
-                for val in depth(node.children[child], False):
-                    yield val
         current = self.root
         for child in ichar:
             if child not in current.children:
                 current = None
                 break
             current = current.children[child]
-        return depth(current, True)
+        return self.depth(current, True)
 
     def autosearch(self, string, sofar=""):
         """Perform auto completion search and print the autocomplete results."""
         if len(string) > 0:
             key = string[0]
             string = string[1:]
-            if key in self.next:
+            if key in self.children:
                 sofar = sofar + key
-                self.next[key].search(string, sofar)
+                self.children[key].search(string, sofar)
             else:
                 print("No match")
         else:
             if self.val == '$':
                 print("Match:", sofar)
 
-            for key in self.next.keys():
-                self.next[key].traverse(sofar + key)
+            for key in self.children.keys():
+                self.children[key].traverse(sofar + key)

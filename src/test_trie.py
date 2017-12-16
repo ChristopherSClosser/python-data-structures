@@ -141,4 +141,9 @@ def test_trie_traverse(trie):
     tree = trie.traverse()
     tl = list(tree)
     tl = ''.join(tl)
+    import pdb; pdb.set_trace()
     assert 'egalit' in tl
+
+
+def test_auto_complete(test_trie):
+    """Test auto complete."""

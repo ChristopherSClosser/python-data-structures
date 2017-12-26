@@ -141,7 +141,7 @@ def test_trie_traverse(trie):
     tree = trie.traverse()
     tl = list(tree)
     tl = ''.join(tl)
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     assert 'egalit' in tl
 
 

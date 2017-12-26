@@ -101,12 +101,19 @@ class Trie(object):
 
     def autosearch(self, string, sofar=""):
         """Perform auto completion search and print the autocomplete results."""
+
+        current = self.root
+        for char in word + '$':
+            if char not in current.children:
+                return False
+            current = current.children[char]
+        return True
         if len(string) > 0:
             key = string[0]
             string = string[1:]
             if key in self.children:
                 sofar = sofar + key
-                self.children[key].search(string, sofar)
+                children[key].search(string, sofar)
             else:
                 print("No match")
         else:

@@ -9,7 +9,6 @@ class Node(object):
         self.val = val
         self.left = None
         self.right = None
-        self.level = None
         self.parent = None
 
 
@@ -23,6 +22,8 @@ class Bst(object):
 
     def insert(self, val):
         """Insert a node into the tree."""
+        if self.search(val):
+            raise ValueError('node already exists')
         if not self.root:
             self.root = Node(val)
             self._size += 1
@@ -34,6 +35,7 @@ class Bst(object):
                     current = current.left
                 else:
                     current.left = Node(val)
+                    current.left.parent = current
                     self._size += 1
                     break
             else:
@@ -41,6 +43,7 @@ class Bst(object):
                     current = current.right
                 else:
                     current.right = Node(val)
+                    current.right.parent = current
                     self._size += 1
                     break
 
@@ -65,39 +68,162 @@ class Bst(object):
             return self._search(val, current.right)
 
     def delete(self, val):
-        """."""
-        if not self.root:
+        """Delete a node of a given value from the bst."""
+        del_node = self.search(val)
+        if not del_node:
+            raise ValueError('node not in tree')
+        if del_node == self.root:
+            self._delete_root(del_node)
             return
-        current = self.root
-        return self._delete(current, val)
+        elif del_node.right:
+            self._del_right_min(del_node)
+            return
+        elif del_node.left:
+            self._del_left_max(del_node)
+            return
+        else:
+            self._del_no_child(del_node)
+        return
 
     def _min_node(self, node):
         """."""
-        current = node
-        while current.left:
-            current = current.left
+        while node.left:
+            node = node.left
+        return node
 
-        return current
-
-    def _delete(self, node, val):
+    def _max_node(self, node):
         """."""
-        if node:
-            if val < node.val:
-                node.left = self._delete(node.left, val)
-            elif val > node.val:
-                node.right = self._delete(node.right, val)
+        while node.right:
+            node = node.right
+        return node
+
+    def _delete_root(self, node):
+        """Delete root."""
+        del_node = node
+        if del_node.right:
+            min_node = self._min_node(del_node.right)
+            self.root = min_node
+            min_node.parent = None
+            if min_node == del_node.right.left:
+                if min_node.right:
+                    del_node.right.left = min_node.right
+                else:
+                    del_node.right.left = None
+                del_node.right.parent = min_node
+                min_node.right = del_node.right
+            if del_node.left:
+                min_node.left = del_node.left
+                del_node.left.parent = min_node
+            del_node = None
+            self._size -= 1
+            return
+        elif del_node.left:
+            max_node = self._max_node(del_node.left)
+            self.root = max_node
+            max_node.parent = None
+            if max_node == del_node.left.right:
+                if max_node.left:
+                    del_node.left.right = max_node.left
+                else:
+                    del_node.left.right = None
+            del_node.left.parent = max_node
+            max_node.left = del_node.left
+            del_node = None
+            self._size -= 1
+            return
+        else:
+            self.root = None
+
+    def _del_right_min(self, node):
+        """If node to delete has right child."""
+        del_node = node
+        min_node = self._min_node(del_node.right)
+        min_node.parent = del_node.parent
+        if min_node == del_node.right.left:
+            del_node.parent.left = min_node
+            if del_node.left:
+                min_node.left = del_node.left
+                del_node.left.parent = min_node
+                if min_node.right:
+                    del_node.right.left = min_node.right
+                    min_node.right.parent = del_node.right
+                    min_node.right = del_node.right
+                    del_node.right.parent = min_node
+                    del_node = None
+                    self._size -= 1
+                    return
+                else:
+                    min_node.right = del_node.right
+                    del_node.right.parent = min_node
+                    del_node.right.left = None
+                    del_node = None
+                    self._size -= 1
+                    return
+        elif min_node == del_node.right:
+            if del_node.left.right:
+                self._del_left_max(del_node)
+                return
+            if del_node.left:
+                min_node.left = del_node.left
+                del_node.parent.left = min_node
+                del_node.left.parent = min_node
+                del_node = None
+                self._size -= 1
+                return
+            if del_node.left.right:
+                del_node.left.parent = del_node.parent
+                del_node.right.parent = del_node.left.right
+                del_node.left.right.right = del_node.right
+                del_node.parent.right = del_node.left
+                del_node = None
+                self._size -= 1
+                return
+            del_node.left.parent = del_node.parent
+            del_node.parent.right = del_node.left
+            del_node.right.parent = del_node.left
+            del_node.left.right = del_node.right
+            del_node = None
+            self._size -= 1
+            return
+        del_node.right.parent = min_node
+        min_node.right = del_node.right
+        if del_node.left:
+            min_node.left = del_node.left
+            del_node.left.parent = min_node
+        del_node = None
+        self._size -= 1
+
+    def _del_left_max(self, node):
+        """If node has no right child or right child has only one sibling."""
+        del_node = node
+        max_node = self._max_node(del_node.left)
+        del_node.parent.right = max_node
+        max_node.parent = del_node.parent
+        if max_node == del_node.left.right:
+            if max_node.left:
+                del_node.left.right = max_node.left
+                max_node.left.parent = del_node.left
             else:
-                if not node.left:
-                    hold = node.right
-                    node = None
-                    return
-                elif not node.right:
-                    hold = node.left
-                    node = None
-                    return
-                hold = self._min_node(node.right)
-                node.val = hold.val
-                node.right = self._delete(node.right, hold.val)
+                del_node.left.right = None
+        del_node.left.parent = max_node
+        max_node.left = del_node.left
+        if del_node.right:
+            del_node.right.parent = max_node
+            max_node.right = del_node.right
+        del_node = None
+        self._size -= 1
+        return
+
+    def _del_no_child(self, node):
+        """If node to delete has no child."""
+        del_node = node
+        if del_node.parent.right == del_node:
+            del_node.parent.right = None
+        else:
+            del_node.parent.left = None
+        del_node = None
+        self._size -= 1
+        return
 
     def size(self):
         """."""

@@ -189,3 +189,11 @@ def test_breadth_first_no_val(bst):
     bst.insert(1)
     tree = bst.breadth_first_traversal(9)
     assert tree.__next__() == 'node not found'
+
+
+def test_delete(bst):
+    """."""
+    bst.insert(3)
+    bst.insert(5)
+    bst.insert(2)
+    bst.insert(1)

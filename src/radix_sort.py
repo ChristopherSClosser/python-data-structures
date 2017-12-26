@@ -31,3 +31,35 @@ def radix_sort(vals):
 
         vals = res
     return vals
+
+
+if __name__ == '__main__':  # pragma: no cover
+    from timeit import timeit
+    from random import randint
+    setup = 'from radix_sort import radix_sort'
+
+    print('Radix sort')
+
+    print('>>> best')
+    for length in range(5, 20, 5):
+        i = [randint(0, 10) for _ in range(length)]
+
+        print('Input: {}'.format(len(i)))
+        time = timeit('radix_sort({})'.format(i), setup)
+        print('    average time: {}ms\n'.format(time))
+
+    print('=== average')
+    for length in range(5, 20, 5):
+        i = [randint(0, 1000) for _ in range(length)]
+
+        print('Input: {}'.format(len(i)))
+        time = timeit('radix_sort({})'.format(i), setup)
+        print('    average time: {}ms\n'.format(time))
+
+    print('<<< worst')
+    for length in range(5, 20, 5):
+        i = [randint(0, 1000000) for _ in range(length)]
+
+        print('Imput: {}'.format(len(i)))
+        time = timeit('radix_sort({})'.format(i), setup)
+        print('    average time: {}ms\n'.format(time))

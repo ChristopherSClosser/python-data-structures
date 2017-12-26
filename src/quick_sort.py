@@ -1,4 +1,11 @@
-"""Implement quick sorting algorithm."""
+"""Implement quick sorting algorithm.
+
+Quicksort is a comparison sort, meaning that it can sort items of any type for
+which a "less-than" relation (formally, a total order) is defined. In efficient
+implementations it is not a stable sort, meaning that the relative order of
+equal sort items is not preserved. Quicksort can operate in-place on an array,
+requiring small additional amounts of memory to perform the sorting.
+"""
 
 
 def quick_sort(vals):

@@ -14,14 +14,39 @@
   - Graph
   - Queue
   - Dequeue
+    - appendleft() O(1)
+    - pop() O(1)
+    - popleft() O(1)
+    - peek() O(1)
+    - peekleft() O(1)
   - priority queue
-  - binary min heap
+  - Binary min heap
+    - push() O(1)
+    - pop() O(1)
+    - _shiftup() O(log-n)
+    - _shiftdown() O(log-n)
+    - _parent() O(log-n)
+    - _leftchild() O(log-n)
+    - _rightchild() O(log-n)
   - Binary search tree
+    - insert() O(log-n)
+    - search(), contains() O(log-n)
+    - size() O(1)
+    - depth() O(n)
+    - balance() O(n)
+    - traversals O(n)
+      - breadth_first_traversal
+      - in_order
+      - pre_order
+      - post_order
+    - delete() O(n)
   - HashTable
     - hash() O(1)
     - set() O(n)
     - extend() O(n)
     - get() O(n)
+  - Insertion sort
+    - O(n^2)
 - Method time complexity
   - push() O(1)
   - pop() O(1)

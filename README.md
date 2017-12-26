@@ -47,6 +47,8 @@
     - get() O(n)
   - Quick Sort
     - O(nlog(n))
+  - Radix Sort
+    - O(nk) - where k is the number of digits in the longest number
 - Method time complexity
   - push() O(1)
   - pop() O(1)

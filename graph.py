@@ -146,7 +146,7 @@ class Graph(object):
         return res
 
     def dijkstra(self, start, end):
-        """Find all shortest distances between nodes  using Dijkstra."""
+        """Find all shortest distances between start and end nodes using Dijkstra."""
         start = self.has_node(start)
         if not start:
             raise KeyError('Graph does not contain start node.')
@@ -189,6 +189,53 @@ class Graph(object):
             path.insert(0, curr)
             curr = paths[curr]
 
+        return path
+
+    def bellman(self, start, end):
+        """"Find the shortest path using bellman ford algorithm."""
+        start = self.has_node(start)
+        if not start:
+            raise KeyError('Graph does not contain start node.')
+        end = self.has_node(end)
+        if not end:
+            raise KeyError('Graph does not containend node.')
+        if not len(self._edges):
+            raise KeyError('No edges in this graph.')
+
+        iterations = len(self.edges()) - 1
+        unvisited = self.nodes()
+        unvisited.remove(start)
+        unvisited.insert(0, start)
+        paths = {node: [float("inf"), ''] for node in self.nodes()}
+        prev_paths = {node: [paths[node][0], paths[node][1]] for node in paths}
+        changing = True
+        overlap = []
+        paths[start][0] = 0
+        edges = self.edges()
+        while iterations >= 0 and changing:
+            for node in unvisited:
+                if paths[node][0] != float("inf"):
+                    for edge in edges:
+                        if edge[0] == node and edge[1] != start:
+                            if paths[node][0] + edge[2] < paths[edge[1]][0]:
+                                paths[edge[1]][0] = paths[node][0] + edge[2]
+                                paths[edge[1]][1] = node
+            for node in self.nodes():
+                if paths[node][0] == prev_paths[node][0]:
+                    overlap.append(node)
+            if len(overlap) == len(self.nodes()):
+                changing = False
+            overlap = []
+            prev_paths = paths
+            iterations -= 1
+        if paths[end][0] == float("inf"):
+            raise IndexError('There is no path between nodes.')
+        curr = end
+        path = []
+        while paths[curr][1]:
+            path.insert(0, curr)
+            curr = paths[curr][1]
+        path.insert(0, start)
         return path
 
 

@@ -541,6 +541,50 @@ def test_graph_dijkstra_end_with_weight():
     assert path[4].val == 15
 
 
+def test_graph_bellman_lenght_with_weight():
+    """test_graph_bellman_lenght_with_weight."""
+    ng = Graph()
+    ng.add_edge(1, 2, 5)
+    ng.add_edge(1, 3, 9)
+    ng.add_edge(2, 4)
+    ng.add_edge(2, 5, 5)
+    ng.add_edge(3, 6)
+    ng.add_edge(3, 7)
+    ng.add_edge(4, 8)
+    ng.add_edge(4, 9)
+    ng.add_edge(5, 10)
+    ng.add_edge(5, 11)
+    ng.add_edge(6, 12)
+    ng.add_edge(6, 13)
+    ng.add_edge(7, 14)
+    ng.add_edge(14, 15)
+    ng.add_edge(7, 15, 9)
+    path = ng.bellman(1, 15)
+    assert len(path) == 5
+
+
+def test_graph_bellman_start_with_weight():
+    """test_graph_bellman_start_with_weight."""
+    ng = Graph()
+    ng.add_edge(1, 2, 5)
+    ng.add_edge(1, 3, 9)
+    ng.add_edge(2, 4)
+    ng.add_edge(2, 5, 5)
+    ng.add_edge(3, 6)
+    ng.add_edge(3, 7)
+    ng.add_edge(4, 8)
+    ng.add_edge(4, 9)
+    ng.add_edge(5, 10)
+    ng.add_edge(5, 11)
+    ng.add_edge(6, 12)
+    ng.add_edge(6, 13)
+    ng.add_edge(7, 14)
+    ng.add_edge(14, 15)
+    ng.add_edge(7, 15, 9)
+    path = ng.bellman(1, 15)
+    assert path[0].val == 1
+
+
 def test_graph_bellman_end_with_weight():
     """test_graph_bellman_end_with_weight."""
     ng = Graph()
@@ -560,5 +604,4 @@ def test_graph_bellman_end_with_weight():
     ng.add_edge(14, 15)
     ng.add_edge(7, 15, 9)
     path = ng.bellman(1, 15)
-    import pdb; pdb.set_trace()
-    # assert path[4].val == 15
+    assert path[4].val == 15

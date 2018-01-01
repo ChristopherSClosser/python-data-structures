@@ -42,6 +42,7 @@
     - adjacent() O(n)
     - traversals O(n)
     - dijkstra() O(n^2)
+    - bellman() O(n^2)
   - Queue (inherits from DLL)
     - enqueue() O(1)
     - dequeue() O(1)

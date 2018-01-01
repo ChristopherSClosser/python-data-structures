@@ -1,6 +1,5 @@
 """Implement a graph."""
 
-from priorityq import Priorityq
 
 class Graph(object):
     """Graph data structure."""
@@ -203,10 +202,10 @@ class Graph(object):
             raise KeyError('No edges in this graph.')
 
         iterations = len(self.edges()) - 1
-        unvisited = self.nodes()
+        unvisited = self._nodes[:]
         unvisited.remove(start)
         unvisited.insert(0, start)
-        paths = {node: [float("inf"), ''] for node in self.nodes()}
+        paths = {node: [float("inf"), ''] for node in self._nodes}
         prev_paths = {node: [paths[node][0], paths[node][1]] for node in paths}
         changing = True
         overlap = []
@@ -220,10 +219,10 @@ class Graph(object):
                             if paths[node][0] + edge[2] < paths[edge[1]][0]:
                                 paths[edge[1]][0] = paths[node][0] + edge[2]
                                 paths[edge[1]][1] = node
-            for node in self.nodes():
+            for node in self._nodes:
                 if paths[node][0] == prev_paths[node][0]:
                     overlap.append(node)
-            if len(overlap) == len(self.nodes()):
+            if len(overlap) == len(self._nodes):
                 changing = False
             overlap = []
             prev_paths = paths

@@ -1,7 +1,5 @@
 """Implement a graph."""
 
-import pdb
-
 
 class Graph(object):
     """Graph data structure."""
@@ -12,15 +10,18 @@ class Graph(object):
         self._edges = []
 
     def nodes(self):
-        """."""
-        return self._nodes
+        """Return list of nodes."""
+        nodes = []
+        for node in self._nodes:
+            nodes.append(node.val)
+        return nodes
 
     def edges(self):
-        """."""
+        """Return list of edges."""
         return self._edges
 
     def add_node(self, val):
-        """."""
+        """Add a node to the graph."""
         for node in self._nodes:
             if node.val == val:
                 return "Nodes must have unique values"
@@ -113,7 +114,6 @@ class Graph(object):
         while unvisited:
             current = unvisited[-1]
             unvisited.remove(current)
-            # import pdb; pdb.set_trace()
             if current.val not in res:
                 res.append(current.val)
             for neighbor in current.neighbors:
@@ -136,7 +136,6 @@ class Graph(object):
         while unvisited:
             current = unvisited[0]
             unvisited.remove(current)
-            # import pdb; pdb.set_trace()
             if current.val not in res:
                 res.append(current.val)
             for neighbor in current.neighbors:

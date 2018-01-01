@@ -2,7 +2,6 @@
 
 from dll import DLL
 from que_ import Queue
-import pdb
 
 
 class Priorityq(DLL):

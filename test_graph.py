@@ -185,6 +185,13 @@ def test_remove_edge(new_graph):
     assert ng._edges == []
 
 
+def test_nodes(new_graph):
+    """Test_remove_edge."""
+    ng = Graph()
+    ng.add_edge(1, 2)
+    assert ng.nodes() == [1, 2]
+
+
 def test_remove_edge_not_exist():
     """Test_remove_edge_not_exist."""
     ng = Graph()
@@ -204,7 +211,6 @@ def test_remove_edge_also_removes_neighbors():
     ng = Graph()
     ng.add_edge(1, 2)
     node1 = ng._nodes[0]
-    # node2 = ng._nodes[1]
     ng.del_edge(1, 2)
     assert node1.neighbors == []
 
@@ -244,7 +250,6 @@ def test_graph_depth_first_large():
     ng.add_edge(2, 3)
     ng.add_edge(3, 4)
     ng.add_edge(3, 5)
-    # print (ng.depth_first_traversal(1))
     assert ng.depth_first_traversal(1) == [1, 8, 12, 9, 11, 10, 7, 2, 3, 5, 4, 6]
 
 
@@ -274,7 +279,6 @@ def test_circular():
     ng.add_edge(1, 2)
     ng.add_edge(1, 3)
     ng.add_edge(3, 1)
-    # print (ng.depth_first_traversal(1))
     assert ng.depth_first_traversal(1) == [1, 3, 2]
 
 

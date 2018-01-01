@@ -9,17 +9,49 @@
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 401 class. (i.e. What's your problem domain?) -->
 - Implementing data structures
   - Single linked list
-  - Stack
-  - Doubly linked list
-  - Graph
-  - Queue
-  - Dequeue
-    - appendleft() O(1)
+    - push() O(1)
     - pop() O(1)
-    - popleft() O(1)
+    - search() O(n)
+    - remove() O(n)
+    - size() O(1)
+    - display() O(n)
+    - len() O(1)
+  - Stack
+    - push() O(1)
+    - pop() O(1)
+    - len() O(1)
+  - Doubly linked list (inherits from SLL)
+    - push() O(1)
+    - pop() O(1)
+    - search() O(n)
+    - remove() O(n)
+    - size() O(1)
+    - display() O(n)
+    - len() O(1)
+    - append() O(1)
+    - shift() O(1)  
+  - Graph
+    - nodes() O(n)
+    - edges() O(1)
+    - add_node() O(n)
+    - add_edge() O(n)
+    - del_node() O(n^2)
+    - del_edge() O(n^2)
+    - has_node() O(n)
+    - neighbors() O(n)
+    - adjacent() O(n)
+  - Queue (inherits from DLL)
+    - enqueue() O(1)
+    - dequeue() O(1)
     - peek() O(1)
+  - Dequeue (inherits from DLL)
+    - popleft() O(1)
+    - appendleft() O(1)
     - peekleft() O(1)
-  - priority queue
+  - Priority queue (inherits from DLL)
+    - pop() O(1)
+    - peek() O(1)
+    - insert O(n)
   - Binary min heap
     - push() O(1)
     - pop() O(1)
@@ -35,18 +67,12 @@
     - depth() O(n)
     - balance() O(n)
     - traversals O(n)
-      - breadth_first_traversal
-      - in_order
-      - pre_order
-      - post_order
-    - delete() O(n)
   - HashTable
     - hash() O(1)
     - set() O(n)
     - extend() O(n)
     - get() O(n)
-  - Insertion sort
-    - O(n^2)
+    - delete() O(n)
 - Method time complexity
   - push() O(1)
   - pop() O(1)
@@ -75,7 +101,6 @@
   - adjacent() O(n)
   - heap depth_first_traversal() O(n^2)
   - heap breadth_first_traversal() O(n^2)
-
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->

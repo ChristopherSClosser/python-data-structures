@@ -1,7 +1,6 @@
 """Implement a graph."""
 
-import pdb
-
+from priorityq import Priorityq
 
 class Graph(object):
     """Graph data structure."""
@@ -12,15 +11,18 @@ class Graph(object):
         self._edges = []
 
     def nodes(self):
-        """."""
-        return self._nodes
+        """Return list of nodes."""
+        nodes = []
+        for node in self._nodes:
+            nodes.append(node.val)
+        return nodes
 
     def edges(self):
-        """."""
+        """Return list of edges."""
         return self._edges
 
     def add_node(self, val):
-        """."""
+        """Add a node to the graph."""
         for node in self._nodes:
             if node.val == val:
                 return "Nodes must have unique values"
@@ -113,7 +115,6 @@ class Graph(object):
         while unvisited:
             current = unvisited[-1]
             unvisited.remove(current)
-            # import pdb; pdb.set_trace()
             if current.val not in res:
                 res.append(current.val)
             for neighbor in current.neighbors:
@@ -136,7 +137,6 @@ class Graph(object):
         while unvisited:
             current = unvisited[0]
             unvisited.remove(current)
-            # import pdb; pdb.set_trace()
             if current.val not in res:
                 res.append(current.val)
             for neighbor in current.neighbors:
@@ -144,6 +144,46 @@ class Graph(object):
                     if not neighbor[1].val in res:
                         unvisited.append(neighbor[1])
         return res
+
+    def dijkstra(self, start, end):
+        """Find all shortest distances between nodes  using Dijkstra."""
+        start = self.has_node(start)
+        if not start:
+            raise KeyError('Graph does not contain start node.')
+        end = self.has_node(end)
+        if not end:
+            raise KeyError('Graph does not containend node.')
+        current = start
+        visited = {}
+        unvisited = {node: float("inf") for node in self._nodes}
+        paths = {node: '' for node in self._nodes}
+        unvisited[current] = 0
+        if not len(self._edges):
+            raise KeyError('No edges in this graph.')
+        edges = {(edge[0], edge[1]): edge[2] for edge in self._edges}
+        while end not in visited or min(unvisited.values()) == float("inf"):
+            origin = current
+            for node in unvisited:
+                if (current, node) in edges:
+                    weight = (unvisited[current] +
+                              edges[(current, node)])
+                    if unvisited[node] > weight:
+                        unvisited[node] = weight
+                        paths[node] = origin
+            visited[current] = min(unvisited.values())
+            del unvisited[current]
+            if len(unvisited):
+                current = min(unvisited.keys(), key=unvisited.get)
+            else:
+                break
+        if visited[end] == float("inf"):
+            raise IndexError('There is no path between those nodes.')
+        curr = end
+        path = []
+        while start not in path:
+            path.insert(0, curr)
+            curr = paths[curr]
+        return path
 
 
 class Node(object):

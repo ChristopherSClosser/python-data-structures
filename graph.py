@@ -153,14 +153,16 @@ class Graph(object):
         end = self.has_node(end)
         if not end:
             raise KeyError('Graph does not containend node.')
+        if not len(self._edges):
+            raise KeyError('No edges in this graph.')
+
         current = start
         visited = {}
         unvisited = {node: float("inf") for node in self._nodes}
         paths = {node: '' for node in self._nodes}
         unvisited[current] = 0
-        if not len(self._edges):
-            raise KeyError('No edges in this graph.')
         edges = {(edge[0], edge[1]): edge[2] for edge in self._edges}
+
         while end not in visited or min(unvisited.values()) == float("inf"):
             origin = current
             for node in unvisited:
@@ -172,17 +174,21 @@ class Graph(object):
                         paths[node] = origin
             visited[current] = min(unvisited.values())
             del unvisited[current]
+
             if len(unvisited):
                 current = min(unvisited.keys(), key=unvisited.get)
             else:
                 break
+
         if visited[end] == float("inf"):
             raise IndexError('There is no path between those nodes.')
+
         curr = end
         path = []
         while start not in path:
             path.insert(0, curr)
             curr = paths[curr]
+
         return path
 
 

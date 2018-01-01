@@ -72,6 +72,7 @@
     - set() O(n)
     - extend() O(n)
     - get() O(n)
+    - delete() O(n)
 - Method time complexity
   - push() O(1)
   - pop() O(1)

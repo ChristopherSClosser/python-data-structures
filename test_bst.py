@@ -191,9 +191,57 @@ def test_breadth_first_no_val(bst):
     assert tree.__next__() == 'node not found'
 
 
-def test_delete(bst):
+def test_delete_single_node(bst):
     """."""
-    bst.insert(3)
-    bst.insert(5)
+    bst.insert(1)
+    bst.delete(1)
+    assert bst.root is None
+
+
+def test_delete_root_only_three_nodes(bst):
+    """."""
     bst.insert(2)
     bst.insert(1)
+    bst.insert(3)
+    bst.delete(2)
+    tree = bst.pre_order(bst.root)
+    tl = list(tree)
+    assert tl == [3, 1]
+
+
+def test_delete_right_min_with_right_child(bst):
+    """."""
+    bst.insert(4)
+    bst.insert(2)
+    bst.insert(6)
+    bst.insert(1)
+    bst.insert(3)
+    bst.insert(5)
+    bst.insert(7)
+    bst.delete(4)
+    bst.insert(2.5)
+    bst.insert(2.6)
+    bst.delete(2)
+    tree = bst.pre_order(bst.root)
+    tl = list(tree)
+    assert tl == [5, 2.5, 1, 3, 2.6, 6, 7]
+
+
+def test_delete_left_max_with_left_child(bst):
+    """."""
+    bst.insert(4)
+    bst.insert(2)
+    bst.insert(6)
+    bst.insert(1)
+    bst.insert(3)
+    bst.insert(5)
+    bst.insert(7)
+    bst.delete(4)
+    bst.insert(2.5)
+    bst.insert(2.6)
+    bst.insert(4)
+    bst.insert(2.55)
+    bst.delete(3)
+    tree = bst.pre_order(bst.root)
+    tl = list(tree)
+    assert tl == [5, 2, 1, 2.6, 2.5, 2.55, 4, 6, 7]

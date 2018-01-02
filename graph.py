@@ -151,7 +151,7 @@ class Graph(object):
             raise KeyError('Graph does not contain start node.')
         end = self.has_node(end)
         if not end:
-            raise KeyError('Graph does not containend node.')
+            raise KeyError('Graph does not contain end node.')
         if not len(self._edges):
             raise KeyError('No edges in this graph.')
 

@@ -1,146 +1,97 @@
+'use strict'
 
-const Node = require('./list-node');
+class Node {
+  constructor(val, next = null){
+    this.val = val
+    this.next = next
+  }
+}
 
-const SLL = module.exports = function() {
-  this.head = null;
-};
+class LinkedList {
+  constructor(iterable = null) {
+    this.head = null
+    this._length = 0
 
-// O(1)
-SLL.prototype.prepend = function(value) {
-  let node = new Node(value);
-
-  if(!this.head) {
-    this.head = node;
-    return this;
+    if(Array.isArray(iterable)){
+      iterable.forEach(x => this.push(x))
+    }
   }
 
-  node.next = this.head;
-  this.head = node;
-  return this;
-};
-
-// O(n)
-SLL.prototype.append = function(value) {
-  let node = new Node(value);
-  let lastNode = null;
-
-  if(!this.head) {
-    this.head = node;
-    return this;
+  push(val){
+    this.head = new Node(val, this.head)
+    this._length ++
   }
 
-  _setLastNode(this.head);
-  lastNode.next = node;
-  return this;
-
-  function _setLastNode(node) {
-    if(!node) return;
-    lastNode = node;
-    _setLastNode(node.next);
-  }
-};
-
-// O(n)
-SLL.prototype.reverse = function() {
-
-  if(!this.head || !this.head.next) return this;
-
-  let nodes = [],
-    currentNode = this.head,
-    node,
-    reverseList = new SLL();
-
-  while(currentNode) {
-    nodes.push(currentNode);
-    currentNode = currentNode.next;
-  }
-
-  reverseList.head = nodes.pop();
-  currentNode = reverseList.head;
-
-  node = nodes.pop();
-
-  while(node) {
-    node.next = null;
-    currentNode.next = node;
-    currentNode = currentNode.next;
-    node = nodes.pop();
-  }
-
-  return reverseList;
-};
-
-// O(n)
-SLL.prototype.remove = function(index) {
-  let currentNode = this.head,
-    i = 0, previous;
-
-  //if list is empty, exit out
-  if(!currentNode) return;
-
-  //Check if first node
-  if(index === 0){
-    this.head = currentNode.next;
-  }else{
-
-    while(i < index){
-      previous = currentNode;
-      currentNode = currentNode.next;
-      i++;
+  pop(){
+    if(this.head === null){
+      return null
     }
 
-    previous.next = currentNode.next;
+    let res = this.head
+    this.head = this.head.next
+    this._length --
 
-    return previous;
+    return res.val
   }
-  /*
-  // pass in the index you want to remove
-  let list = a list with many nodes
-  list.remove(some index)
-  */
-};
 
-// O(n) this counts from the end
-SLL.prototype.nthNode = function(n) {
-  let currentNode = this.head,
-    i = 1,
-    nthNode;
+  search(val){
+    let _search = this.head
 
-  if(n <= 0) return;
-
-  while(currentNode) {
-    if(i === n) {
-      nthNode = this.head;
-    } else if (i - n > 0) {
-      nthNode = nthNode.next;
+    try{
+      while(this.head){
+        if(val === _search.val){
+          return _search
+        }else{
+          _search = _search.next
+        }
+      }
+    }catch(e){
+      return 'No such Node'
     }
-    i++;
-
-    currentNode = currentNode.next;
   }
-  return nthNode;
-};
 
-// O(n)
-SLL.prototype.findMiddle = function(err) {
-  if(err) console.error(err);
-  let middleEnd = [];
+  remove(val){
+    let currNode = this.head
+    let prevNode = null
+    let found = false
 
-  let i = 0,
-    currentNode = this.head,
-    middleNode = this.head;
+    try{
+      while(currNode && !found){
+        if(val === currNode.val){
+          found = true
+        }else{
+          prevNode = currNode
+          currNode = currNode.next
+        }
+      }
 
-  while(currentNode.next != null){
-    i++;
-    if(i % 2 == 0){
-      middleNode = middleNode.next;
+      if(prevNode === null){
+        this.pop()
+      }else if(currNode.next === null){
+        prevNode.next = null
+      }else{
+        prevNode.next = currNode.next
+      }
+    }catch(e){
+      return 'No Node with that value.'
     }
-    currentNode = currentNode.next;
+    this._length --
   }
 
-  if(i % 2 == 1){
-    middleNode = middleNode.next;
+  display(){
+    let node = this.head
+    let res = []
+
+    while(node){
+      res.push(node.val)
+      node = node.next
+    }
+    return res.join(', ')
   }
-  middleEnd.push(middleNode, i);
-  return middleEnd;
-};
+
+  size(){
+    return this._length
+  }
+}
+
+module.exports = {LinkedList, Node}

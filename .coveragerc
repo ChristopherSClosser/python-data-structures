@@ -7,5 +7,4 @@ include=stack.py,
         graph.py,
         linked_list.py,
         priorityq.py,
-        que_.py,
-        bst.py
+        que_.py

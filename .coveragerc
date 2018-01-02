@@ -1,10 +1,11 @@
 [run]
 include=stack.py,
-        linked_list.py,
         dequeue.py,
         binary_heap.py,
         dll.py,
         graph.py,
-        linked_list.py,
         priorityq.py,
-        que_.py
+        shortest-path
+        que_.py,
+        insertion_sort.py,
+        merge_sort.py

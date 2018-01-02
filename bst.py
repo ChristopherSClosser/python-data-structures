@@ -29,12 +29,13 @@ class Bst(object):
             self._size += 1
             return
         current = self.root
+        new_node = Node(val)
         while True:
             if val < current.val:
                 if current.left:
                     current = current.left
                 else:
-                    current.left = Node(val)
+                    current.left = new_node
                     current.left.parent = current
                     self._size += 1
                     break
@@ -42,10 +43,11 @@ class Bst(object):
                 if current.right:
                     current = current.right
                 else:
-                    current.right = Node(val)
+                    current.right = new_node
                     current.right.parent = current
                     self._size += 1
                     break
+        # self._balance(new_node)
 
     def search(self, val):
         """."""
@@ -225,6 +227,41 @@ class Bst(object):
         self._size -= 1
         return
 
+    def _balance(self, node):
+        """."""
+        if self.balance(node) >= 2:
+            self._left_pivot(node)
+        elif self.balance(node) <= 2:
+            self._right_pivot(node)
+
+    def _left_pivot(self, node):
+        """."""
+        piv_node = node.right
+        if node.parent:
+            node.parent.right = piv_node
+        else:
+            self.root = piv_node
+        piv_node.parent = node.parent
+        node.parent = piv_node
+        if piv_node.left:
+            piv_node.left.parent = node
+        node.right = piv_node.left
+        piv_node.left = node
+
+    def _right_pivot(self, node):
+        """."""
+        piv_node = node.left
+        if node.parent:
+            node.parent.left = piv_node
+        else:
+            self.root = piv_node
+        piv_node.parent = node.parent
+        node.parent = piv_node
+        if piv_node.right:
+            piv_node.right.parent = node
+        node.left = piv_node.right
+        piv_node.right = node
+
     def size(self):
         """."""
         return self._size
@@ -242,12 +279,12 @@ class Bst(object):
             return True
         return False
 
-    def balance(self, root):
+    def balance(self, node):
         """."""
-        if root is None:
+        if node is None:
             return 0
         else:
-            return (self.depth(root.left)) - (self.depth(root.right))
+            return (self.depth(node.left)) - (self.depth(node.right))
 
     def in_order(self, node):
         """."""

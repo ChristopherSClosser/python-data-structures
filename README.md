@@ -8,7 +8,7 @@
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 401 class. (i.e. What's your problem domain?) -->
 - Implementing data structures
-  - Single linked list
+  - Single linked list (+JavaScript)
     - push() O(1)
     - pop() O(1)
     - search() O(n)
@@ -16,7 +16,7 @@
     - size() O(1)
     - display() O(n)
     - len() O(1)
-  - Stack
+  - Stack (+JavaScript)
     - push() O(1)
     - pop() O(1)
     - len() O(1)
@@ -84,40 +84,12 @@
     - O(nlog(n))
   - Radix Sort
     - O(nk) - where k is the number of digits in the longest number
-- Method time complexity
-  - push() O(1)
-  - pop() O(1)
-  - popleft() O(1)
-  - search() O(n)
-  - remove() O(n)
-  - size() O(1)
-  - display() O(n)
-  - len() O(1)
-  - print() O(n)
-  - append() O(1)
-  - appendleft() O(1)
-  - shift() O(1)
-  - enqueue() O(1)
-  - dequeue() O(1)
-  - peek() O(1)
-  - peekleft() O(1)
-  - nodes() O(1)
-  - edges() O(1)
-  - add_node() O(n)
-  - add_edge() O(n)
-  - del_node() O(n^2)
-  - del_edge() O(n^2)
-  - has_node() O(n)
-  - neighbors() O(n)
-  - adjacent() O(n)
-  - heap depth_first_traversal() O(n^2)
-  - heap breadth_first_traversal() O(n^2)
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
   You can fork or clone the repository [here](https://github.com/ChristopherSClosser/python-data-structures)  
   Python setup virtual environment and pytest  
-  For JavaScript navigate to js/ then npm i, run tests by entering npm test
+  For JavaScript navigate to `js/` then `npm i`, run tests by entering `npm test`
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->

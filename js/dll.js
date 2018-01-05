@@ -12,13 +12,13 @@ class DLL{
   constructor(){
     this.head = null
     this.tail = null
-    this._counter = 0
+    this.len = 0
   }
 
   push(val){
     let oldHead = this.head
     this.head = new Node(val, this.next = this.head)
-    this._counter ++
+    this.len ++
     if(oldHead){
       oldHead.prev = this.head
     }else{
@@ -29,7 +29,7 @@ class DLL{
   append(val){
     let oldTail = this.tail
     this.tail = new Node(val, this.prev = this.tail)
-    this._counter ++
+    this.len ++
     if(oldTail){
       oldTail.next = this.tail
     }else{
@@ -38,7 +38,7 @@ class DLL{
   }
 
   pop(){
-    if(this._counter === 0){
+    if(this.len === 0){
       this.head = null
       this.tail = null
     }
@@ -52,12 +52,12 @@ class DLL{
     }else{
       this.tail = null
     }
-    this._counter --
+    this.len --
     return output
   }
 
   shift(){
-    if(this._counter === 0){
+    if(this.len === 0){
       this.head = null
       this.tail = null
     }
@@ -71,7 +71,7 @@ class DLL{
     }else{
       this.head = null
     }
-    this._counter --
+    this.len --
     return output
   }
 
@@ -88,7 +88,7 @@ class DLL{
       if(curr.val === val){
         curr.prev.next = curr.next
         curr.next.prev = curr.prev
-        this._counter --
+        this.len --
         return
       }
       curr = curr.next

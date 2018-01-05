@@ -1,10 +1,13 @@
 [run]
 include=src/binary_heap.py,
+        src/bubble_sort.py,
         src/dequeue.py,
         src/dll.py,
         src/graph.py,
         src/grid.py,
+        src/insertion_sort.py,
         src/linked_list.py,
+        src/merge_sort.py,
         src/priorityq.py,
         src/que_.py,
         src/quick_sort.py,

@@ -70,12 +70,20 @@
     - depth() O(n)
     - balance() O(n)
     - traversals O(n)
+      - breadth_first_traversal
+      - in_order
+      - pre_order
+      - post_order
+    - delete() O(n)
   - HashTable
     - hash() O(1)
     - set() O(n)
     - extend() O(n)
     - get() O(n)
-    - delete() O(n)
+  - Quick Sort
+    - O(nlog(n))
+  - Radix Sort
+    - O(nk) - where k is the number of digits in the longest number
 - Method time complexity
   - push() O(1)
   - pop() O(1)

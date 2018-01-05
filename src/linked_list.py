@@ -71,49 +71,6 @@ class LinkedList(object):
         thing += ')'
         return thing
 
-    def addTwoLists(self, first, second):
-        prev = None
-        temp = None
-        hold = 0
-
-        while(first or second):
-            if not first:
-                firstval = 0
-            else:
-                firstval = first.val
-            if not second:
-                secondval = 0
-            else:
-                secondval = second.val
-            sumof = hold + firstval + secondval
-
-            if sumof >= 10:
-                hold = 1
-            else:
-                hold = 0
-
-            if sumof < 10:
-                sumof = sumof
-            else:
-                sumof = sumof % 10
-
-            temp = Node(sumof)
-
-            if self.head is None:
-                self.head = temp
-            else:
-                prev.next = temp
-
-            prev = temp
-
-            if first is not None:
-                first = first.next
-            if second is not None:
-                second = second.next
-
-        if hold > 0:
-            temp.next = Node(hold)
-
 
 class Node(object):
     """Class for node."""

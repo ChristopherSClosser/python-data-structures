@@ -4,10 +4,11 @@
 class Node(object):
     """Node for a Trie tree."""
 
-    def __init__(self, val, parent=None):
+    def __init__(self, val, parent=None, next=None):
         """Create a node with the given value."""
         self.val = val
         self.parent = parent
+        self.next = next
         self.children = {}
 
 
@@ -75,3 +76,49 @@ class Trie(object):
 
         del current.children[last_char]
         self._size -= 1
+
+    def depth(self, node, init):
+        """Get all node vals depth first."""
+        if not node:
+            return
+        if node.val != '*' and node.val != '$' and not init:
+            yield node.val
+        for child in node.children:
+            for val in self.depth(node.children[child], False):
+                yield val
+
+    def traverse(self, ichar=''):
+        """."""
+        if not isinstance(ichar, str):
+            raise TypeError('must be a letter or empty string, ""')
+        current = self.root
+        for child in ichar:
+            if child not in current.children:
+                current = None
+                break
+            current = current.children[child]
+        return self.depth(current, True)
+
+    def autosearch(self, string, sofar=""):
+        """Perform auto completion search and print the autocomplete results."""
+
+        current = self.root
+        for char in word + '$':
+            if char not in current.children:
+                return False
+            current = current.children[char]
+        return True
+        if len(string) > 0:
+            key = string[0]
+            string = string[1:]
+            if key in self.children:
+                sofar = sofar + key
+                children[key].search(string, sofar)
+            else:
+                print("No match")
+        else:
+            if self.val == '$':
+                print("Match:", sofar)
+
+            for key in self.children.keys():
+                self.children[key].traverse(sofar + key)

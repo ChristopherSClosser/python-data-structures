@@ -7,25 +7,28 @@ class Graph(object):
     def __init__(self):
         """."""
         self._nodes = []
+        self.list_nodes = []
         self._edges = []
+        self.list_edges = []
 
     def nodes(self):
         """Return list of nodes."""
         nodes = []
-        for node in self._nodes:
+        for node in self.list_nodes:
             nodes.append(node.val)
         return nodes
 
     def edges(self):
         """Return list of edges."""
-        return self._edges
+        return self.list_edges
 
     def add_node(self, val):
-        """Add a node to the graph."""
-        for node in self._nodes:
+        """."""
+        for node in self.list_nodes:
             if node.val == val:
                 return "Nodes must have unique values"
-        self._nodes.append(Node(val))
+        self.list_nodes.append(Node(val))
+        self._nodes.append(val)
 
     def add_edge(self, val1, val2, weight=0):
         """Add a connection between two nodes, val1 points to val2."""
@@ -33,57 +36,57 @@ class Graph(object):
             return 'weight must be int or float'
         node1 = 0
         node2 = 0
-        for node in self._nodes:
+        for node in self.list_nodes:
             if node.val == val1:
                 node1 = node
             if node.val == val2:
                 node2 = node
         if node1 == 0:
             node1 = Node(val1)
-            self._nodes.append(node1)
+            self.list_nodes.append(node1)
         if node2 == 0:
             node2 = Node(val2)
-            self._nodes.append(node2)
+            self.list_nodes.append(node2)
         if node1 == node2:
             return "You cannot connect a node to itself"
-        for edge in self._edges:
+        for edge in self.list_edges:
             if edge == (node1, node2, weight):
                 return 'Edge already exists'
         node1.neighbors.append((node1, node2, weight))
         node2.neighbors.append((node1, node2, weight))
-        self._edges.append((node1, node2, weight))
+        self.list_edges.append((node1, node2, weight))
 
     def del_node(self, val):
         """Delete and remove edges."""
         del_node = self.has_node(val)
         if not del_node:
             return 'node not found'
-        self._nodes.remove(del_node)
+        self.list_nodes.remove(del_node)
 
-        for edge in self._edges:
+        for edge in self.list_edges:
             if del_node.val == edge[0].val or del_node.val == edge[1].val:
-                self._edges.remove(edge)
-        for node in self._nodes:
+                self.list_edges.remove(edge)
+        for node in self.list_nodes:
             for neighbor in node.neighbors:
                 if del_node.val == neighbor[0].val or del_node.val == neighbor[1].val:
                     node.neighbors.remove(neighbor)
 
     def del_edge(self, val1, val2):
         """Remove an edge."""
-        for edge in self._edges:
+        for edge in self.list_edges:
             if edge[0].val == val1 and edge[1].val == val2:
-                self._edges.remove(edge)
+                self.list_edges.remove(edge)
                 del_node1 = edge[0]
             else:
                 return 'edge not found'
-        for node in self._nodes:
+        for node in self.list_nodes:
             for neighbor in node.neighbors:
                 if del_node1.val == neighbor[0].val or del_node1.val == neighbor[1].val:
                     node.neighbors.remove(neighbor)
 
     def has_node(self, val):
         """Return the node if found."""
-        for node in self._nodes:
+        for node in self.list_nodes:
             if node.val == val:
                 return node
 
@@ -94,7 +97,7 @@ class Graph(object):
 
     def adjacent(self, val1, val2):
         """Return True if edge exists."""
-        for edge in self._edges:
+        for edge in self.list_edges:
             if edge[0].val == val1 and edge[1].val == val2:
                 return True
             else:
@@ -152,15 +155,15 @@ class Graph(object):
         end = self.has_node(end)
         if not end:
             raise KeyError('Graph does not contain end node.')
-        if not len(self._edges):
+        if not len(self.list_edges):
             raise KeyError('No edges in this graph.')
 
         current = start
         visited = {}
-        unvisited = {node: float("inf") for node in self._nodes}
-        paths = {node: '' for node in self._nodes}
+        unvisited = {node: float("inf") for node in self.list_nodes}
+        paths = {node: '' for node in self.list_nodes}
         unvisited[current] = 0
-        edges = {(edge[0], edge[1]): edge[2] for edge in self._edges}
+        edges = {(edge[0], edge[1]): edge[2] for edge in self.list_edges}
 
         while end not in visited or min(unvisited.values()) == float("inf"):
             origin = current
@@ -198,14 +201,14 @@ class Graph(object):
         end = self.has_node(end)
         if not end:
             raise KeyError('Graph does not containend node.')
-        if not len(self._edges):
+        if not len(self.list_edges):
             raise KeyError('No edges in this graph.')
 
         iterations = len(self.edges()) - 1
-        unvisited = self._nodes[:]
+        unvisited = self.list_nodes[:]
         unvisited.remove(start)
         unvisited.insert(0, start)
-        paths = {node: [float("inf"), ''] for node in self._nodes}
+        paths = {node: [float("inf"), ''] for node in self.list_nodes}
         prev_paths = {node: [paths[node][0], paths[node][1]] for node in paths}
         changing = True
         overlap = []
@@ -219,10 +222,10 @@ class Graph(object):
                             if paths[node][0] + edge[2] < paths[edge[1]][0]:
                                 paths[edge[1]][0] = paths[node][0] + edge[2]
                                 paths[edge[1]][1] = node
-            for node in self._nodes:
+            for node in self.list_nodes:
                 if paths[node][0] == prev_paths[node][0]:
                     overlap.append(node)
-            if len(overlap) == len(self._nodes):
+            if len(overlap) == len(self.list_nodes):
                 changing = False
             overlap = []
             prev_paths = paths

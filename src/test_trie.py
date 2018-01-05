@@ -20,10 +20,13 @@ TEST_WORDS = ['unwieldier', 'Quixote', 'illegalities', 'glands', 'pronoun',
               "procrastinator's", "cornball's", "rubella's", 'Ngaliema',
               "now's", "Gatling's", 'mind']
 
+TEST_WORDS = sorted(TEST_WORDS)
+
 
 @pytest.fixture
 def test_trie():
     """Create a small filled trie."""
+
     return Trie(TEST_WORDS)
 
 
@@ -123,3 +126,24 @@ def test_remove_string_from_trie_removes_the_string(test_trie, word):
     assert test_trie.contains(word) is True
     test_trie.remove(word)
     assert test_trie.contains(word) is False
+
+
+def test_trie_traverse(trie):
+    """."""
+    trie.insert('ill')
+    trie.insert('illegal')
+    trie.insert('illegalities')
+    trie.insert('intent')
+    trie.insert('intention')
+    trie.insert('illintent')
+    trie.insert('illegality')
+
+    tree = trie.traverse()
+    tl = list(tree)
+    tl = ''.join(tl)
+    # import pdb; pdb.set_trace()
+    assert 'egalit' in tl
+
+
+def test_auto_complete(test_trie):
+    """Test auto complete."""

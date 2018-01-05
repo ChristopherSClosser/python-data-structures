@@ -1,8 +1,7 @@
 """Test double linked list."""
 
 import pytest
-from dll import DLL
-from linked_list import Node
+from dll import DLL, Node
 
 
 @pytest.fixture

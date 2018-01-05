@@ -21,7 +21,12 @@ def test_push_to_dll(new_dll):
     new_dll.push(1)
     new_dll.push(2)
     assert new_dll.head.val == 2
-# test for head.val == tail.val
+
+
+def test_head_equals_tail(new_dll):
+    """Test for push method, two items."""
+    new_dll.push(1)
+    assert new_dll.head.val == new_dll.tail.val
 
 
 def test_push_to_empty_dll(new_dll):
@@ -204,3 +209,11 @@ def test_remove_for_head_val(new_dll):
     new_dll.push(3)
     new_dll.remove(3)
     assert new_dll.head.val == 2
+
+
+@pytest.mark.parametrize('n', range(100))
+def test_size_method_returns_list_length2(new_dll, n):
+    """Test size method on linked list."""
+    for i in range(n):
+        new_dll.push(i)
+    assert new_dll.size() == n

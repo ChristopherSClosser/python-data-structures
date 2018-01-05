@@ -3,7 +3,7 @@
 # Implement Data Structures In Python
 
 - **Max Wolff & Chris Closser**
-- **Version**: 1.0.2
+- **Version**: 1.0.6
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 401 class. (i.e. What's your problem domain?) -->
@@ -43,7 +43,7 @@
     - traversals O(n)
     - dijkstra() O(n^2)
     - bellman() O(n^2)
-  - Queue (inherits from DLL)
+  - Queue (inherits from DLL) (+JavaScript)
     - enqueue() O(1)
     - dequeue() O(1)
     - peek() O(1)

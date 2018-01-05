@@ -189,6 +189,7 @@ def test_nodes(new_graph):
     """Test_remove_edge."""
     ng = Graph()
     ng.add_edge(1, 2)
+    # import pdb; pdb.set_trace()
     assert ng.nodes() == [1, 2]
 
 

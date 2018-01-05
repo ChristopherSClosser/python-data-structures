@@ -14,13 +14,13 @@ class Graph(object):
     def nodes(self):
         """Return list of nodes."""
         nodes = []
-        for node in self._nodes:
+        for node in self.list_nodes:
             nodes.append(node.val)
         return nodes
 
     def edges(self):
         """Return list of edges."""
-        return self._edges
+        return self.list_edges
 
     def add_node(self, val):
         """."""
@@ -155,15 +155,15 @@ class Graph(object):
         end = self.has_node(end)
         if not end:
             raise KeyError('Graph does not contain end node.')
-        if not len(self._edges):
+        if not len(self.list_edges):
             raise KeyError('No edges in this graph.')
 
         current = start
         visited = {}
-        unvisited = {node: float("inf") for node in self._nodes}
-        paths = {node: '' for node in self._nodes}
+        unvisited = {node: float("inf") for node in self.list_nodes}
+        paths = {node: '' for node in self.list_nodes}
         unvisited[current] = 0
-        edges = {(edge[0], edge[1]): edge[2] for edge in self._edges}
+        edges = {(edge[0], edge[1]): edge[2] for edge in self.list_edges}
 
         while end not in visited or min(unvisited.values()) == float("inf"):
             origin = current
@@ -201,14 +201,14 @@ class Graph(object):
         end = self.has_node(end)
         if not end:
             raise KeyError('Graph does not containend node.')
-        if not len(self._edges):
+        if not len(self.list_edges):
             raise KeyError('No edges in this graph.')
 
         iterations = len(self.edges()) - 1
-        unvisited = self._nodes[:]
+        unvisited = self.list_nodes[:]
         unvisited.remove(start)
         unvisited.insert(0, start)
-        paths = {node: [float("inf"), ''] for node in self._nodes}
+        paths = {node: [float("inf"), ''] for node in self.list_nodes}
         prev_paths = {node: [paths[node][0], paths[node][1]] for node in paths}
         changing = True
         overlap = []
@@ -222,10 +222,10 @@ class Graph(object):
                             if paths[node][0] + edge[2] < paths[edge[1]][0]:
                                 paths[edge[1]][0] = paths[node][0] + edge[2]
                                 paths[edge[1]][1] = node
-            for node in self._nodes:
+            for node in self.list_nodes:
                 if paths[node][0] == prev_paths[node][0]:
                     overlap.append(node)
-            if len(overlap) == len(self._nodes):
+            if len(overlap) == len(self.list_nodes):
                 changing = False
             overlap = []
             prev_paths = paths

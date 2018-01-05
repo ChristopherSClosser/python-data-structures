@@ -8,7 +8,7 @@ class Binheap(object):
         """."""
         self.container = []
         self._tailidx = -1
-        if isinstance(iterable, (str, tuple, list)):
+        if isinstance(iterable, (str, tuple, list)):  # pragma no cover
             for i in iterable:
                 self.push(i)
 

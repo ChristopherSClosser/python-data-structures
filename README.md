@@ -9,17 +9,52 @@
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 401 class. (i.e. What's your problem domain?) -->
 - Implementing data structures
   - Single linked list
-  - Stack
-  - Doubly linked list
-  - Graph
-  - Queue
-  - Dequeue
-    - appendleft() O(1)
+    - push() O(1)
     - pop() O(1)
-    - popleft() O(1)
+    - search() O(n)
+    - remove() O(n)
+    - size() O(1)
+    - display() O(n)
+    - len() O(1)
+  - Stack
+    - push() O(1)
+    - pop() O(1)
+    - len() O(1)
+  - Doubly linked list (inherits from SLL)
+    - push() O(1)
+    - pop() O(1)
+    - search() O(n)
+    - remove() O(n)
+    - size() O(1)
+    - display() O(n)
+    - len() O(1)
+    - append() O(1)
+    - shift() O(1)  
+  - Graph
+    - nodes() O(n)
+    - edges() O(1)
+    - add_node() O(n)
+    - add_edge() O(n)
+    - del_node() O(n^2)
+    - del_edge() O(n^2)
+    - has_node() O(n)
+    - neighbors() O(n)
+    - adjacent() O(n)
+    - traversals O(n)
+    - dijkstra() O(n^2)
+    - bellman() O(n^2)
+  - Queue (inherits from DLL)
+    - enqueue() O(1)
+    - dequeue() O(1)
     - peek() O(1)
+  - Dequeue (inherits from DLL)
+    - popleft() O(1)
+    - appendleft() O(1)
     - peekleft() O(1)
-  - priority queue
+  - Priority queue (inherits from DLL)
+    - pop() O(1)
+    - peek() O(1)
+    - insert O(n)
   - Binary min heap
     - push() O(1)
     - pop() O(1)

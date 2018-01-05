@@ -1,8 +1,8 @@
-"""Implementation of Binheap."""
+"""Implementation of min heap."""
 
 
 class Binheap(object):
-    """Implement a min heap."""
+    """Binary min heap."""
 
     def __init__(self, iterable=None):
         """."""

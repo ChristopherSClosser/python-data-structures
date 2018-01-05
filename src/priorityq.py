@@ -4,7 +4,7 @@ from dll import DLL
 from que_ import Queue
 
 
-class Priorityq(DLL):
+class Priorityq(object):
     """Class for priority queue."""
 
     def __init__(self):

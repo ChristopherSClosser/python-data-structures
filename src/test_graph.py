@@ -185,6 +185,13 @@ def test_remove_edge(new_graph):
     assert ng.list_edges == []
 
 
+def test_nodes(new_graph):
+    """Test_remove_edge."""
+    ng = Graph()
+    ng.add_edge(1, 2)
+    assert ng.nodes() == [1, 2]
+
+
 def test_remove_edge_not_exist():
     """Test_remove_edge_not_exist."""
     ng = Graph()
@@ -249,8 +256,9 @@ def test_graph_depth_first_large():
     assert ng.depth_first_traversal(1) == [1, 8, 12, 9, 11, 10, 7, 2, 3, 5, 4, 6]
 
 
-def test_graph_depth_first_large_2():
-    """Test_graph_depth_first_large_2."""
+@pytest.fixture
+def ng():
+    """Non weighted graph."""
     ng = Graph()
     ng.add_edge(1, 2)
     ng.add_edge(1, 3)
@@ -266,6 +274,11 @@ def test_graph_depth_first_large_2():
     ng.add_edge(6, 13)
     ng.add_edge(7, 14)
     ng.add_edge(7, 15)
+    return ng
+
+
+def test_graph_depth_first_large_2(ng):
+    """Test_graph_depth_first_large_2."""
     assert ng.depth_first_traversal(1) == [1, 3, 7, 15, 14, 6, 13, 12, 2, 5, 11, 10, 4, 9, 8]
 
 
@@ -275,7 +288,6 @@ def test_circular():
     ng.add_edge(1, 2)
     ng.add_edge(1, 3)
     ng.add_edge(3, 1)
-    # print (ng.depth_first_traversal(1))
     assert ng.depth_first_traversal(1) == [1, 3, 2]
 
 
@@ -292,23 +304,8 @@ def test_circular_more_complex():
     assert ng.depth_first_traversal(1) == [1, 3, 4, 5, 2]
 
 
-def test_graph_breadth_first_large():
+def test_graph_breadth_first_large(ng):
     """Test_graph_breadth_first_large."""
-    ng = Graph()
-    ng.add_edge(1, 2)
-    ng.add_edge(1, 3)
-    ng.add_edge(2, 4)
-    ng.add_edge(2, 5)
-    ng.add_edge(3, 6)
-    ng.add_edge(3, 7)
-    ng.add_edge(4, 8)
-    ng.add_edge(4, 9)
-    ng.add_edge(5, 10)
-    ng.add_edge(5, 11)
-    ng.add_edge(6, 12)
-    ng.add_edge(6, 13)
-    ng.add_edge(7, 14)
-    ng.add_edge(7, 15)
     assert ng.breadth_first_traversal(1) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
 
@@ -342,43 +339,13 @@ def test_graph_breadth_first_unbalanced_different_order():
     assert ng.breadth_first_traversal(1) == [1, 2, 4, 3, 5, 6, 7, 8, 9, 10]
 
 
-def test_graph_breadth_first_large_start_at_2():
+def test_graph_breadth_first_large_start_at_2(ng):
     """Test_graph_breadth_first_large_start_at_2."""
-    ng = Graph()
-    ng.add_edge(1, 2)
-    ng.add_edge(1, 3)
-    ng.add_edge(2, 4)
-    ng.add_edge(2, 5)
-    ng.add_edge(3, 6)
-    ng.add_edge(3, 7)
-    ng.add_edge(4, 8)
-    ng.add_edge(4, 9)
-    ng.add_edge(5, 10)
-    ng.add_edge(5, 11)
-    ng.add_edge(6, 12)
-    ng.add_edge(6, 13)
-    ng.add_edge(7, 14)
-    ng.add_edge(7, 15)
     assert ng.breadth_first_traversal(2) == [2, 4, 5, 8, 9, 10, 11]
 
 
-def test_graph_depth_first_large_2_start_at_2():
+def test_graph_depth_first_large_2_start_at_2(ng):
     """Test_graph_depth_first_large_2_start_at_2."""
-    ng = Graph()
-    ng.add_edge(1, 2)
-    ng.add_edge(1, 3)
-    ng.add_edge(2, 4)
-    ng.add_edge(2, 5)
-    ng.add_edge(3, 6)
-    ng.add_edge(3, 7)
-    ng.add_edge(4, 8)
-    ng.add_edge(4, 9)
-    ng.add_edge(5, 10)
-    ng.add_edge(5, 11)
-    ng.add_edge(6, 12)
-    ng.add_edge(6, 13)
-    ng.add_edge(7, 14)
-    ng.add_edge(7, 15)
     assert ng.depth_first_traversal(2) == [2, 5, 11, 10, 4, 9, 8]
 
 
@@ -407,3 +374,149 @@ def test_add_duplicate_node():
     ng = Graph()
     ng.add_node(1)
     assert ng.add_node(1) == "Nodes must have unique values"
+
+
+def test_graph_dijkstra_lenght(ng):
+    """Test_graph_dijkstra_lenght."""
+    path = ng.dijkstra(1, 15)
+    assert len(path) == 4
+
+
+def test_graph_dijkstra_first_val(ng):
+    """test_graph_dijkstra_first_val."""
+    path = ng.dijkstra(1, 15)
+    assert path[0].val == 1
+
+
+def test_graph_dijkstra_end_val(ng):
+    """test_graph_dijkstra_end_val."""
+    path = ng.dijkstra(1, 15)
+    assert path[3].val == 15
+
+
+@pytest.fixture
+def wng():
+    """Weighted graph."""
+    ng = Graph()
+    ng.add_edge(1, 2, 5)
+    ng.add_edge(1, 3, 9)
+    ng.add_edge(2, 4)
+    ng.add_edge(2, 5, 5)
+    ng.add_edge(3, 6)
+    ng.add_edge(3, 7)
+    ng.add_edge(4, 8)
+    ng.add_edge(4, 9)
+    ng.add_edge(5, 10)
+    ng.add_edge(5, 11)
+    ng.add_edge(6, 12)
+    ng.add_edge(6, 13)
+    ng.add_edge(7, 14)
+    ng.add_edge(14, 15)
+    ng.add_edge(7, 15, 9)
+    return ng
+
+
+def test_graph_dijkstra_lenght_with_weight(wng):
+    """test_graph_dijkstra_lenght_with_weight."""
+    path = wng.dijkstra(1, 15)
+    assert len(path) == 5
+
+
+def test_graph_dijkstra_start_with_weight(wng):
+    """test_graph_dijkstra_start_with_weight."""
+    path = wng.dijkstra(1, 15)
+    assert path[0].val == 1
+
+
+def test_graph_dijkstra_end_with_weight(wng):
+    """test_graph_dijkstra_end_with_weight."""
+    path = wng.dijkstra(1, 15)
+    assert path[4].val == 15
+
+
+def test_graph_bellman_lenght_with_weight(wng):
+    """test_graph_bellman_lenght_with_weight."""
+    path = wng.bellman(1, 15)
+    assert len(path) == 5
+
+
+def test_graph_bellman_start_with_weight(wng):
+    """test_graph_bellman_start_with_weight."""
+    path = wng.bellman(1, 15)
+    assert path[0].val == 1
+
+
+def test_graph_bellman_end_with_weight(wng):
+    """test_graph_bellman_end_with_weight."""
+    path = wng.bellman(1, 15)
+    assert path[4].val == 15
+
+
+def test_graph_dijkstra_not_start(ng):
+    """test_graph_dijkstra_not_start."""
+    with pytest.raises(KeyError):
+        ng.dijkstra(16, 20)
+
+
+def test_graph_dijkstra_not_end(ng):
+    """test_graph_dijkstra_not_end."""
+    with pytest.raises(KeyError):
+        ng.dijkstra(1, 20)
+
+
+def test_graph_dijkstra_no_edges():
+    """test_graph_dijkstra_no_edges."""
+    ng = Graph()
+    ng.add_node(1)
+    ng.add_node(2)
+    with pytest.raises(KeyError):
+        ng.dijkstra(1, 2)
+
+
+def test_graph_dijkstra_no_path_to_end():
+    """test_graph_dijkstra_no_path_to_end."""
+    ng = Graph()
+    ng.add_edge(1, 2, 5)
+    ng.add_edge(1, 3, 9)
+    ng.add_edge(2, 4)
+    ng.add_edge(2, 5, 5)
+    ng.add_edge(3, 6)
+    ng.add_edge(7, 14)
+    ng.add_edge(14, 15)
+    with pytest.raises(IndexError):
+        ng.dijkstra(1, 15)
+
+
+def test_graph_bellman_not_start(ng):
+    """test_graph_bellman_not_start."""
+    with pytest.raises(KeyError):
+        ng.bellman(16, 20)
+
+
+def test_graph_bellman_not_end(ng):
+    """test_graph_bellman_not_end."""
+    with pytest.raises(KeyError):
+        ng.bellman(1, 20)
+
+
+def test_graph_bellman_no_edges():
+    """test_graph_bellman_no_edges."""
+    ng = Graph()
+    ng.add_node(1)
+    ng.add_node(2)
+    with pytest.raises(KeyError):
+        ng.bellman(1, 2)
+
+
+def test_graph_bellman_no_path_to_end():
+    """test_graph_bellman_no_path_to_end."""
+    ng = Graph()
+    ng.add_edge(1, 2, 5)
+    ng.add_edge(1, 3, 9)
+    ng.add_edge(2, 4)
+    ng.add_edge(2, 5, 5)
+    ng.add_edge(3, 6)
+    ng.add_edge(7, 14)
+    ng.add_edge(14, 15)
+    with pytest.raises(IndexError):
+        ng.bellman(1, 15)

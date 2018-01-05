@@ -47,7 +47,7 @@
     - enqueue() O(1)
     - dequeue() O(1)
     - peek() O(1)
-  - Dequeue (inherits from DLL)
+  - Dequeue (inherits from DLL) (+JavaScript)
     - popleft() O(1)
     - appendleft() O(1)
     - peekleft() O(1)

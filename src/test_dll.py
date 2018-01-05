@@ -87,6 +87,12 @@ def test_pop_prev_val(new_dll):
     assert new_dll.head.next_node.prev_node.val == 2
 
 
+def test_remove_from_empty_list(new_dll):
+    """Test_remove_node_from_list."""
+    with pytest.raises(IndexError):
+        new_dll.remove(2)
+
+
 def test_remove_node_from_list(new_dll):
     """Test_remove_node_from_list."""
     new_dll.push(3)

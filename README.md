@@ -51,7 +51,7 @@
     - popleft() O(1)
     - appendleft() O(1)
     - peekleft() O(1)
-  - Priority queue (inherits from DLL)
+  - Priority queue (inherits from DLL) (+JavaScript)
     - pop() O(1)
     - peek() O(1)
     - insert O(n)

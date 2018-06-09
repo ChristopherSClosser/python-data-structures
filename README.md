@@ -20,7 +20,7 @@
     - push() O(1)
     - pop() O(1)
     - len() O(1)
-  - Doubly linked list (inherits from SLL)
+  - Doubly linked list (inherits from SLL) (+JavaScript)
     - push() O(1)
     - pop() O(1)
     - search() O(n)
